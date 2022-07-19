@@ -1,5 +1,5 @@
-import React, { MouseEvent } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { actions, selectors } from './store/store';
 import './App.css';
 
@@ -7,7 +7,7 @@ function App() {
 	const count = useSelector(selectors.count);
 	const dispatch = useDispatch();
 
-	const increaseCountHandle = (e: MouseEvent<HTMLButtonElement>) => {
+	const increaseCountHandle = (e: React.MouseEvent<HTMLButtonElement>) => {
 		if (e.currentTarget.dataset.set === 'incBtn') {
 			dispatch(actions.increment());
 		} else {
@@ -16,12 +16,12 @@ function App() {
 	};
 
 	return (
-		<div className='App'>
+		<div className="App">
 			<h1>{count}</h1>
-			<button data-set='incBtn' onClick={increaseCountHandle}>
+			<button data-set="incBtn" onClick={increaseCountHandle}>
 				inc+
 			</button>
-			<button data-set='decBtn' onClick={increaseCountHandle}>
+			<button data-set="decBtn" onClick={increaseCountHandle}>
 				dec-
 			</button>
 		</div>
