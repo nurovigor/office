@@ -3,6 +3,7 @@ import './App.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { actions, selectors } from './store/store';
 
+
 function App() {
   const count = useSelector(selectors.count);
   const dispatch = useDispatch();
@@ -15,12 +16,8 @@ function App() {
     }
   };
 
-  return (
-    <div className="App">
-      <h1>{count}</h1>
-      <button data-set="incBtn" onClick={increaseCountHandle}>
-        inc+
-      </button>
+  return (<div className="App"><h1>{count}</h1><button data-set="incBtn" onClick={increaseCountHandle}>
+        inc+</button>
       <button data-set="decBtn" onClick={increaseCountHandle}>
         dec-
       </button>
