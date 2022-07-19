@@ -18,7 +18,7 @@ const { reducer, actions, selectors: stateSelectors } = buildNodes(app);
 
 const selectors = {
 	...stateSelectors,
-	countResult: createSelector(stateSelectors.count, (count) => count)
+	countResult: createSelector(stateSelectors.count, (count: number): number => count)
 };
 
 export const store = createStore(reducer);
