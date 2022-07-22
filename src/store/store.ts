@@ -1,28 +1,10 @@
-import { buildNodes, node } from 'redux-nodes';
-import { legacy_createStore as createStore } from 'redux';
-import { createSelector } from 'reselect';
+import { applyMiddleware, legacy_createStore as createStore } from 'redux';
+import thunk from 'redux-thunk';
+import nodes from './nodes/index';
 
-const app = node(
-	{
-		//initialState
-		count: 0
-	},
-	{
-		//actions
-		increment: (state) => state.count++,
-		decrement: (state) => state.count--
-	}
-);
+const { reducer } = nodes;
 
-const { reducer, actions, selectors: stateSelectors } = buildNodes(app);
+export const store = createStore(reducer, applyMiddleware(thunk));
 
-const selectors = {
-	...stateSelectors,
-	countResult: createSelector(stateSelectors.count, (count: number): number => count)
-};
-
-export const store = createStore(reducer);
-
-selectors.count(store.getState());
-
-export { actions, selectors };
+//@ts-ignore
+window.state = store.getState();

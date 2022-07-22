@@ -1,30 +1,46 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { actions, selectors } from './store/store';
+import { Route, Routes } from 'react-router-dom';
+import { Office } from './pages/Office';
+import { Technics } from './pages/Technics';
+import { Header, links } from './components/molecules/Header';
+import { Floor } from './components/molecules/Floor';
+import { OpenSpaceOne } from './components/molecules/OpenSpaceOne';
+import { OpenSpaceTwo } from './components/molecules/OpenSpaceTwo';
+import { OpenSpaceFour } from './components/molecules/OpenSpaceFour';
 import './App.css';
 
 function App() {
-	const count = useSelector(selectors.count);
-	const dispatch = useDispatch();
-
-	const increaseCountHandle = (e: React.MouseEvent<HTMLButtonElement>) => {
-		if (e.currentTarget.dataset.set === 'incBtn') {
-			dispatch(actions.increment());
-		} else {
-			dispatch(actions.decrement());
-		}
-	};
-
 	return (
-		<div className="App">
-			<h1>{count}</h1>
-			<button data-set="incBtn" onClick={increaseCountHandle}>
-				inc+
-			</button>
-			<button data-set="decBtn" onClick={increaseCountHandle}>
-				dec-
-			</button>
-		</div>
+		<>
+			<Header links={links} />
+			<Routes>
+				{/*{routes.map((item, index) => (
+					<Route key={index} path={item.path} element={<item.component />} />
+				))}*/}
+				<Route path={'/'} element={<Office />}>
+					<Route
+						path={'floor1'}
+						element={
+							<Floor floorNumber={1}>
+								<OpenSpaceOne />
+								<OpenSpaceTwo />
+							</Floor>
+						}
+					/>
+
+					<Route
+						path={'floor2'}
+						element={
+							<Floor floorNumber={2}>
+								<OpenSpaceOne />
+								<OpenSpaceFour />
+							</Floor>
+						}
+					/>
+				</Route>
+				<Route path={'/technics'} element={<Technics />} />
+			</Routes>
+		</>
 	);
 }
 
