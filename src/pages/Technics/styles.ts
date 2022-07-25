@@ -1,4 +1,4 @@
-import { css } from '@linaria/core';
+import { css } from 'linaria';
 
 export const technicsBlock = css`
 	padding: 0 20px;

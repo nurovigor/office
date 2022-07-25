@@ -1,4 +1,4 @@
-import { css } from '@linaria/core';
+import { css } from 'linaria';
 
 const tablesBlock = css`
 	display: flex;

@@ -1,4 +1,4 @@
-import { css } from '@linaria/core';
+import { css } from 'linaria';
 
 export const tableStyle = css`
 	width: 55px;
@@ -6,6 +6,7 @@ export const tableStyle = css`
 	background: url('../../../assets/table.png') no-repeat center;
 	background-size: contain;
 	cursor: pointer;
+
 	&:hover {
 		background-image: url('../../../assets/activeTable.png');
 	}

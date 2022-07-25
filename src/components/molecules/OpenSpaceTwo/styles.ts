@@ -1,4 +1,4 @@
-import { css } from '@linaria/core';
+import { css } from 'linaria';
 
 const workSpaceTwo = css`
 	height: 276px;

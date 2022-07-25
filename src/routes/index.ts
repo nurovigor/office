@@ -4,12 +4,12 @@ import { FunctionComponent } from 'react';
 
 export type RouteType = {
 	path: string;
-	component: FunctionComponent;
+	component: FunctionComponent | any;
 };
 
 export const routes: RouteType[] = [
 	{
-		path: '/',
+		path: '/office',
 		component: Office
 	},
 	{

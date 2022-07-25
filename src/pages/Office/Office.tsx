@@ -1,13 +1,19 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import { officeBlock } from './styles';
-import { Link } from '../../components/atoms/Link';
+import { Link } from 'src/components/atoms/Link';
+import { FloorType } from 'src/routes/floors';
 
-export const Office = () => {
+type OfficePropsType = {
+	floors: FloorType[];
+};
+
+export const Office: React.FC<OfficePropsType> = ({ floors }) => {
 	return (
 		<div>
-			<Link path={'/floor1'} title={'Floor one'} />
-			<Link path={'/floor2'} title={'Floor two'} />
+			{floors.map(({ path, name }, index) => (
+				<Link key={index} path={path} title={name} />
+			))}
 			<div className={officeBlock}>
 				<Outlet />
 			</div>

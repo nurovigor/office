@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link } from '../../atoms/Link';
-
-import { LinkType } from '../../../common/consts/links';
 import { headerBlock } from './styles';
+import { LinkType } from 'src/types/types';
 
 type HeaderPropsType = {
 	links: LinkType[];

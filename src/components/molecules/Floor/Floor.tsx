@@ -1,15 +1,21 @@
-import React, { ReactNode } from 'react';
-import styles from './styles';
+import React from 'react';
+import { insideBlock, floorBlock } from './styles';
+import { OpenSpace } from '../OpenSpace/OpenSpace';
+import { OpenSpaceNumber } from 'src/types/types';
 
-type FloorOnePropsType = {
-	floorNumber: number;
-	children: ReactNode;
+export type FloorOnePropsType = {
+	plan: string;
+	openSpaceNumbers: OpenSpaceNumber[];
 };
 
-export const Floor: React.FC<FloorOnePropsType> = ({ floorNumber, children }) => {
+export const Floor: React.FC<FloorOnePropsType> = ({ openSpaceNumbers, plan }) => {
 	return (
-		<div className={styles.floorBlock} data-floor={floorNumber}>
-			<div className={styles.insideBlock}>{children}</div>
+		<div className={floorBlock} style={{ backgroundImage: `url(${plan})` }}>
+			<div className={insideBlock}>
+				{openSpaceNumbers.map((number, index) => (
+					<OpenSpace key={index} number={number} />
+				))}
+			</div>
 		</div>
 	);
 };

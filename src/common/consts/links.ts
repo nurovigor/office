@@ -1,11 +1,8 @@
-export type LinkType = {
-	path: string;
-	title: string;
-};
+import { LinkType } from 'src/types/types';
 
 export const links: LinkType[] = [
 	{
-		path: '/',
+		path: '/office',
 		title: 'Office'
 	},
 	{
