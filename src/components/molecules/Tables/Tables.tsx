@@ -1,23 +1,32 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { Table } from '../../atoms/Table';
-import styles from './styles';
-
-type RotateType = 0 | 180;
+import { tablesBlock } from './styles';
+import { Tooltip } from 'src/components/atoms/Tooltip';
+import { DirectionType } from 'src/types/types';
 
 type TablesPropsType = {
 	count: number;
-	rotateTables: RotateType;
+	direction?: DirectionType;
 };
 
-export const Tables: React.FC<TablesPropsType> = ({ count, rotateTables }) => {
-	const onClickHandle = useCallback(() => {
-		alert('Test');
-	}, [alert]);
-
+export const Tables: React.FC<TablesPropsType> = ({ count, direction = 'top' }) => {
 	return (
-		<div className={styles.tablesBlock} data-rotate={rotateTables}>
+		<div className={tablesBlock} data-position={direction}>
 			{Array.from({ length: count }).map((item, index) => (
-				<Table callBack={onClickHandle} key={index} />
+				<Tooltip
+					direction={'top'}
+					key={index}
+					content={
+						<p>
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto atque cupiditate
+							dolor doloremque esse
+						</p>
+					}
+				>
+					<div>
+						<Table direction={direction} />
+					</div>
+				</Tooltip>
 			))}
 		</div>
 	);

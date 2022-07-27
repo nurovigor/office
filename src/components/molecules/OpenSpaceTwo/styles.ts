@@ -1,6 +1,6 @@
 import { css } from 'linaria';
 
-const workSpaceTwo = css`
+export const workSpaceTwo = css`
 	height: 276px;
 	width: 75%;
 	position: absolute;
@@ -8,39 +8,29 @@ const workSpaceTwo = css`
 	left: 0;
 `;
 
-const topBlocks = css`
+export const topBlocks = css`
 	position: absolute;
 	width: 100%;
 `;
 
-const topLeftBlock = css`
+export const topLeftBlock = css`
 	position: absolute;
 	left: 0;
 `;
 
-const topRightBlock = css`
+export const topRightBlock = css`
 	position: absolute;
 	right: 0;
 `;
 
-const leftBottomBlock = css`
+export const leftBottomBlock = css`
 	position: absolute;
-	transform: rotate(270deg);
-	left: -55px;
-	bottom: 56px;
+	left: 0;
+	bottom: 0;
 `;
 
-const middleBlock = css`
+export const middleBlock = css`
 	position: absolute;
 	bottom: 45px;
 	left: 115px;
 `;
-
-export default {
-	workSpaceTwo,
-	topBlocks,
-	topLeftBlock,
-	topRightBlock,
-	leftBottomBlock,
-	middleBlock
-};

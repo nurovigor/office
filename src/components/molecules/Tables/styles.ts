@@ -1,14 +1,14 @@
 import { css } from 'linaria';
 
-const tablesBlock = css`
+export const tablesBlock = css`
 	display: flex;
 	width: 100%;
 
-	&[data-rotate='180'] {
-		transform: rotate(180deg);
+	&[data-position='right'] {
+		flex-direction: column;
+	}
+
+	&[data-position='left'] {
+		flex-direction: column;
 	}
 `;
-
-export default {
-	tablesBlock
-};

@@ -10,4 +10,20 @@ export const tableStyle = css`
 	&:hover {
 		background-image: url('../../../assets/activeTable.png');
 	}
+
+	&[data-direction='top'] {
+		transform: rotate(0deg);
+	}
+
+	&[data-direction='right'] {
+		transform: rotate(90deg);
+	}
+
+	&[data-direction='bottom'] {
+		transform: rotate(180deg);
+	}
+
+	&[data-direction='left'] {
+		transform: rotate(270deg);
+	}
 `;

@@ -1,10 +1,11 @@
 import React from 'react';
 import { tableStyle } from './styles';
+import { DirectionType } from 'src/types/types';
 
 type LinkPropsType = {
-	callBack: () => void;
+	direction: DirectionType;
 };
 
-export const Table: React.FC<LinkPropsType> = ({ callBack }) => {
-	return <div className={tableStyle} onClick={callBack}></div>;
+export const Table: React.FC<LinkPropsType> = ({ direction }) => {
+	return <div className={tableStyle} data-direction={direction}></div>;
 };

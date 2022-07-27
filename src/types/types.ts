@@ -4,3 +4,7 @@ export type LinkType = {
 	path: string;
 	title: string;
 };
+
+export type RotateType = 0 | 90 | 180 | 270;
+
+export type DirectionType = 'top' | 'right' | 'bottom' | 'left';

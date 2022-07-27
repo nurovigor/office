@@ -1,20 +1,28 @@
 import React from 'react';
-import styles from './styles';
+import {
+	workSpaceFour,
+	leftBottomBlock,
+	rightBottomBlock,
+	rightMiddleBlock,
+	leftMiddleBlock
+} from './styles';
 import { Tables } from '../Tables';
 
 export const OpenSpaceFour = () => {
 	return (
-		<div className={styles.workSpaceFour}>
-			<Tables count={3} rotateTables={0} />
-			<div className={styles.leftBottomBlock}>
-				<Tables count={3} rotateTables={0} />
+		<div className={workSpaceFour}>
+			<Tables count={3} />
+			<div className={leftBottomBlock}>
+				<Tables count={3} direction={'left'} />
 			</div>
-			<div className={styles.middleBlock}>
-				<Tables count={3} rotateTables={180} />
-				<Tables count={3} rotateTables={0} />
+			<div className={leftMiddleBlock}>
+				<Tables count={3} direction={'right'} />
 			</div>
-			<div className={styles.rightBottomBlock}>
-				<Tables count={3} rotateTables={0} />
+			<div className={rightMiddleBlock}>
+				<Tables count={3} direction={'left'} />
+			</div>
+			<div className={rightBottomBlock}>
+				<Tables count={3} direction={'right'} />
 			</div>
 		</div>
 	);
