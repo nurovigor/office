@@ -2,6 +2,7 @@ import React, { ReactNode, useEffect, useState, useRef } from 'react';
 import { TooltipTip, TooltipWrapper } from './styles';
 import { DirectionType } from 'src/types/types';
 import cn from 'classnames';
+import { Button } from 'src/components/atoms/Button';
 
 type TooltipPropsType = {
 	children: ReactNode;
@@ -28,7 +29,6 @@ export const Tooltip: React.FC<TooltipPropsType> = ({ children, content, showMod
 				}
 				return;
 			}
-
 			setActive(false);
 		};
 		document.addEventListener('click', handleClickOutside, true);
@@ -58,9 +58,9 @@ export const Tooltip: React.FC<TooltipPropsType> = ({ children, content, showMod
 					ref={boxRef}
 				>
 					{content}
-					<button onClick={() => showModal()} ref={btnRef}>
-						Click
-					</button>
+					<Button ref={btnRef} onClick={() => showModal()}>
+						Edit
+					</Button>
 				</div>
 			)}
 		</div>

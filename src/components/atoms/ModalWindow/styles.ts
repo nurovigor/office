@@ -1,5 +1,5 @@
 import { css } from 'linaria';
-import { boxShadow, colors } from 'src/components/_settings/_variables';
+import { colors } from 'src/components/_settings/_variables';
 
 export const Overlay = css`
 	 {
@@ -10,25 +10,22 @@ export const Overlay = css`
 		bottom: 0;
 		z-index: 1000;
 		background-color: ${colors.blackColor};
-		opacity: 0.5;
+		opacity: 0.1;
 	}
 `;
 
 export const Wrapper = css`
 	 {
 		position: fixed;
-		background-color: ${colors.white};
+		background-color: ${colors.whiteSmokeColor};
 		top: 50%;
 		left: 50%;
 		transform: translate(-50%, -50%);
-		padding: 50px 30px 50px 50px;
+		padding: 50px 50px 25px 50px;
 		z-index: 1000;
 		min-width: 100px;
 		min-height: 50px;
 		border-radius: 4px;
-		-webkit-box-shadow: ${boxShadow.shadow};
-		-moz-box-shadow: ${boxShadow.shadow};
-		box-shadow: ${boxShadow.shadow};
 	}
 `;
 
@@ -36,6 +33,7 @@ export const HeaderModal = css`
 	 {
 		display: flex;
 		position: relative;
+		margin-bottom: 10px;
 	}
 `;
 
@@ -43,6 +41,7 @@ export const Title = css`
 	 {
 		font-size: 22px;
 		font-weight: bold;
+		margin: 0 auto;
 	}
 `;
 
@@ -62,8 +61,8 @@ export const CloseBtn = css`
 		&:before,
 		&:after {
 			position: absolute;
-			right: -50%;
-			top: -180%;
+			right: -110%;
+			top: -155%;
 			content: ' ';
 			height: 20px;
 			width: 2px;

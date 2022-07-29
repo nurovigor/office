@@ -2,7 +2,11 @@ export const colors = {
 	blackColor: '#000',
 	whiteSmokeColor: '#f1f1f1',
 	darkCharcoal: '#333',
-	white: '#fff'
+	white: '#fff',
+	dressBlues: '#293241',
+	primaryColor: '#1d3557',
+	observatory: '#008f68',
+	bloodline: '#8F2000'
 };
 
 export const boxShadow = {

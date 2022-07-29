@@ -1,7 +1,7 @@
 import { css } from 'linaria';
 import { boxShadow, colors } from 'src/components/_settings/_variables';
 
-const paddingBottomPosition = '6px';
+const paddingBottomPosition = '40px 20px';
 const paddingTopPosition = '100px';
 
 export const TooltipWrapper = css`
@@ -40,10 +40,10 @@ export const TooltipTip = css`
 	}
 
 	&.Top {
-		top: calc(${paddingTopPosition} * -1);
+		top: calc(${paddingTopPosition} * -4);
 
 		&::before {
-			top: 95%;
+			top: 98%;
 			border-bottom-color: ${colors.whiteSmokeColor};
 		}
 	}

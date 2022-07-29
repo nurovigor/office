@@ -1,11 +1,11 @@
 import { css } from 'linaria';
 
 export const workSpaceOne = css`
-	height: 465px;
-	width: 282px;
+	height: 513px;
+	width: 302px;
 	position: absolute;
-	right: 0;
-	top: 38px;
+	right: 45px;
+	top: 72px;
 `;
 export const bottomBlock = css`
 	position: absolute;

@@ -13,6 +13,6 @@ export const floorBlock = css`
 
 export const insideBlock = css`
 	position: relative;
-	width: 79%;
-	height: 95%;
+	width: 100%;
+	height: 100%;
 `;
