@@ -14,6 +14,10 @@ type AutocompleteFieldPropType = {
 	suggestions: string[];
 };
 
+const ENTER = 13;
+const UP = 38;
+const DOWN = 40;
+
 export const AutocompleteField: React.FC<AutocompleteFieldPropType & FieldProps> = ({
 	field,
 	form: { errors, setErrors, setValues, values },
@@ -21,7 +25,7 @@ export const AutocompleteField: React.FC<AutocompleteFieldPropType & FieldProps>
 	...props
 }) => {
 	const [activeSuggestion, setActiveSuggestion] = useState(0);
-	const [filteredSuggestions, setFilteredSuggestions] = useState<string[] | []>([]);
+	const [filteredSuggestions, setFilteredSuggestions] = useState<string[]>([]);
 	const [showSuggestions, setShowSuggestions] = useState(false);
 	const [userInput, setUserInput] = useState(values[field.name]);
 	const [isShowInput, setShowInput] = useState(false);
@@ -29,11 +33,8 @@ export const AutocompleteField: React.FC<AutocompleteFieldPropType & FieldProps>
 	const onChangeHandle = (e: ChangeEvent<HTMLInputElement>) => {
 		const userInput = e.currentTarget.value;
 
-		/*setErrors({ ...errors, [field.name]: '' });
-		setValues({ ...values, [field.name]: userInput });*/
-
-		const filteredSuggestions = suggestions.filter(
-			(suggestion) => suggestion.toLowerCase().indexOf(userInput.toLowerCase()) > -1
+		const filteredSuggestions = suggestions.filter((suggestion) =>
+			suggestion.toLowerCase().includes(userInput.toLowerCase())
 		);
 
 		setActiveSuggestion(0);
@@ -53,19 +54,19 @@ export const AutocompleteField: React.FC<AutocompleteFieldPropType & FieldProps>
 	};
 
 	const onKeyDownHandle = (e: React.KeyboardEvent<HTMLInputElement>) => {
-		if (e.keyCode === 13) {
+		if (e.keyCode === ENTER) {
 			setActiveSuggestion(0);
 			setShowSuggestions(false);
 			setUserInput(filteredSuggestions[activeSuggestion]);
 			setValues({ ...values, [field.name]: filteredSuggestions[activeSuggestion] });
 			setShowInput(false);
-		} else if (e.keyCode === 38) {
+		} else if (e.keyCode === UP) {
 			if (activeSuggestion === 0) {
 				return;
 			}
 			setActiveSuggestion(activeSuggestion - 1);
 			setUserInput(filteredSuggestions[activeSuggestion - 1]);
-		} else if (e.keyCode === 40) {
+		} else if (e.keyCode === DOWN) {
 			if (activeSuggestion === filteredSuggestions.length - 1) {
 				return;
 			}

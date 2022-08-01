@@ -93,7 +93,6 @@ export const FormComponent: React.FC<FormComponentPropsType> = ({ item }) => {
 									suggestions={suggestions}
 									className={cn(Input, { InputError: errors.developer && touched.developer })}
 								/>
-								{/*<ErrorMessage name="developer" component="span" className={Errors} />*/}
 							</div>
 
 							{items.map((item, index) => (

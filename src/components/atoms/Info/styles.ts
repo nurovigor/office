@@ -1,11 +1,6 @@
 import { css } from 'linaria';
 import { colors } from 'src/components/_settings/_variables';
 
-export const Container = css`
-	 {
-	}
-`;
-
 export const Row = css`
 	 {
 		display: flex;

@@ -35,7 +35,7 @@ export const Tables: React.FC<TablesPropsType> = ({ count, direction = 'top' }) 
 			{Array.from({ length: count }).map((item, index) => (
 				<div key={index}>
 					<Tooltip
-						direction={'top'}
+						direction="top"
 						showModal={setActiveModalHandle}
 						content={<Info infoData={developer} />}
 					>
