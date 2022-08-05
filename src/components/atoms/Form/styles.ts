@@ -39,7 +39,7 @@ export const Input = css`
 export const Errors = css`
 	 {
 		position: absolute;
-		left: 82px;
+		left: 150px;
 		top: 30px;
 		color: ${colors.bloodline};
 		font-size: 13px;

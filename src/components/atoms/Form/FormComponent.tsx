@@ -4,23 +4,11 @@ import * as Yup from 'yup';
 import { AutocompleteField } from 'src/components/atoms/AutocompleteField';
 import { Button } from 'src/components/atoms/Button';
 import cn from 'classnames';
+import { TableTypeI } from 'src/store/nodes/officeNode';
+import { useAppDispatch } from 'src/hooks';
+import { updateTable } from 'src/store/thunks';
 import { Container, Errors, FormRow, Input } from './styles';
-
-const suggestions = [
-	'Ryu',
-	'E.Honda',
-	'Blanka',
-	'Guile',
-	'Balrog',
-	'Vega',
-	'Ken',
-	'Chun Li',
-	'Zangief',
-	'Dhalsim',
-	'Sagat',
-	'M.Bison',
-	'Cammy'
-];
+import { Nullable } from 'src/types/types';
 
 export interface FormI {
 	pc: string;
@@ -32,15 +20,27 @@ export interface FormI {
 	camera: string;
 }
 
-export interface FormPropsI extends FormI {
+export interface ValueI extends FormI {
+	id: Nullable<string>;
 	developer: string;
 }
 
-type FormComponentPropsType = {
-	item: FormPropsI;
+export type SuggestionType = {
+	fullName: string;
+	id: string;
 };
 
-export const FormComponent: React.FC<FormComponentPropsType> = ({ item }) => {
+type FormComponentPropsType = {
+	item: TableTypeI;
+	suggestions: SuggestionType[];
+	closeModal: () => void;
+};
+
+export const FormComponent: React.FC<FormComponentPropsType> = ({
+	item,
+	suggestions,
+	closeModal
+}) => {
 	const signInSchema = Yup.object().shape({
 		developer: Yup.string().required('Developer is required'),
 		pc: Yup.string().required('PC is required'),
@@ -52,15 +52,18 @@ export const FormComponent: React.FC<FormComponentPropsType> = ({ item }) => {
 		camera: Yup.string().required('Camera is required')
 	});
 
+	const dispatch = useAppDispatch();
+
 	const initialValues = {
-		developer: item.developer,
-		pc: item.pc,
-		monitor: item.monitor,
-		keyboard: item.keyboard,
-		mouse: item.mouse,
-		microphone: item.microphone,
-		headphones: item.headphones,
-		camera: item.camera
+		developer: item.developer ? `${item.developer.firstName} ${item.developer.lastName}` : 'null',
+		pc: item.pc || 'null',
+		monitor: item.monitor || 'null',
+		keyboard: item.keyboard || 'null',
+		mouse: item.mouse || 'null',
+		microphone: item.microphone || 'null',
+		headphones: item.headphones || 'null',
+		camera: item.camera || 'null',
+		id: item.developer ? item.developer._id : 'null'
 	};
 
 	const items: (keyof FormI)[] = [
@@ -73,25 +76,40 @@ export const FormComponent: React.FC<FormComponentPropsType> = ({ item }) => {
 		'camera'
 	];
 
-	return (
-		<Formik initialValues={initialValues} validationSchema={signInSchema} onSubmit={() => {}}>
-			{(formik) => {
-				const { errors, touched, isValid, dirty } = formik;
+	const submitForm = (values: ValueI, { resetForm }: { resetForm: () => void }) => {
+		dispatch(
+			updateTable({
+				camera: values.camera,
+				headphones: values.headphones,
+				keyboard: values.keyboard,
+				microphone: values.microphone,
+				monitor: values.monitor,
+				mouse: values.mouse,
+				pc: values.pc,
+				tableId: item._id,
+				developerId: values.id
+			})
+		);
+		closeModal();
+		resetForm();
+	};
 
-				const disabledBtn = !(dirty && isValid);
+	return (
+		<Formik initialValues={initialValues} validationSchema={signInSchema} onSubmit={submitForm}>
+			{(formik) => {
+				const { errors, submitCount } = formik;
 
 				return (
 					<div className={Container}>
 						<Form autoComplete="off">
 							<div className={FormRow}>
 								<label htmlFor="developer">developer</label>
-
 								<Field
 									name={'developer'}
 									id={'developer'}
 									component={AutocompleteField}
 									suggestions={suggestions}
-									className={cn(Input, { InputError: errors.developer && touched.developer })}
+									className={cn(Input, { InputError: errors.developer && submitCount > 0 })}
 								/>
 							</div>
 
@@ -102,15 +120,15 @@ export const FormComponent: React.FC<FormComponentPropsType> = ({ item }) => {
 										<Field
 											name={item}
 											id={item}
-											className={cn(Input, { InputError: errors[item] && touched[item] })}
+											className={cn(Input, { InputError: errors[item] && submitCount > 0 })}
 										/>
-										<ErrorMessage name={item} component="span" className={Errors} />
+										{submitCount > 0 && (
+											<ErrorMessage name={item} component="span" className={Errors} />
+										)}
 									</div>
 								</div>
 							))}
-							<Button type={'submit'} disabled={disabledBtn}>
-								Save
-							</Button>
+							<Button type={'submit'}>Save</Button>
 						</Form>
 					</div>
 				);

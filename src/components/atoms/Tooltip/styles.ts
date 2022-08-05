@@ -28,9 +28,9 @@ export const TooltipTip = css`
 
 	&::before {
 		content: ' ';
-		left: 50%;
+		left: 49%;
 		top: calc(6px * -1);
-		border: 6px solid ${colors.whiteSmokeColor};
+		border: 7px solid ${colors.whiteSmokeColor};
 		height: 0;
 		width: 0;
 		position: absolute;
@@ -40,7 +40,7 @@ export const TooltipTip = css`
 	}
 
 	&.Top {
-		top: calc(${paddingTopPosition} * -4);
+		top: calc(${paddingTopPosition} * -5);
 
 		&::before {
 			top: 98%;

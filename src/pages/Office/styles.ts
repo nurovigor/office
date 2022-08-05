@@ -5,4 +5,15 @@ export const officeBlock = css`
 	display: flex;
 	justify-content: center;
 	height: 100vh;
+	position: relative;
+`;
+
+export const Btn = css`
+	 {
+		position: fixed;
+		z-index: 100;
+		& a {
+			margin-right: 10px;
+		}
+	}
 `;

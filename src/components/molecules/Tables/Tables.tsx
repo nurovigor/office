@@ -6,29 +6,35 @@ import { FormComponent } from 'src/components/atoms/Form';
 import { DirectionType } from 'src/types/types';
 import { tablesBlock } from './styles';
 import { Info } from 'src/components/atoms/Info';
-
-const developer = {
-	developer: 'Ken',
-	pc: 'Mac Mini',
-	monitor: 'Apple display',
-	keyboard: 'Magic-keyboard',
-	mouse: 'Magic-mouse',
-	microphone: 'no',
-	headphones: 'AirPods Max',
-	camera: 'no'
-};
+import { useAppSelector } from 'src/hooks';
 
 type TablesPropsType = {
 	count: number;
 	direction?: DirectionType;
+	fromNumber: number;
 };
 
-export const Tables: React.FC<TablesPropsType> = ({ count, direction = 'top' }) => {
+export const Tables: React.FC<TablesPropsType> = ({ count, direction = 'top', fromNumber }) => {
+	const tables = useAppSelector((state) => state.officeNode.tables);
+	const devs = useAppSelector((state) => state.officeNode.developers);
 	const [isActive, setIsActive] = useState(false);
+	const [activeIndex, setActiveIndex] = useState<number>(0);
 
-	const setActiveModalHandle = useCallback(() => {
+	const suggestions = devs.map((developer) => ({
+		fullName: `${developer.firstName} ${developer.lastName}`,
+		id: developer._id
+	}));
+
+	suggestions.push({ fullName: 'Empty', id: 'null' });
+
+	const setActiveModalHandle = useCallback((idx: number) => {
+		setActiveIndex(idx);
 		setIsActive(true);
 	}, []);
+
+	if (!tables.length) {
+		return null;
+	}
 
 	return (
 		<div className={tablesBlock} data-position={direction}>
@@ -36,20 +42,28 @@ export const Tables: React.FC<TablesPropsType> = ({ count, direction = 'top' }) 
 				<div key={index}>
 					<Tooltip
 						direction="top"
-						showModal={setActiveModalHandle}
-						content={<Info infoData={developer} />}
+						showModal={() => setActiveModalHandle(index)}
+						content={<Info table={tables[fromNumber + index - 1]} />}
 					>
 						<div>
-							<Table direction={direction} />
+							<Table
+								direction={direction}
+								isActive={tables[fromNumber + index - 1].developer !== null}
+							/>
 						</div>
 					</Tooltip>
-					{isActive && (
-						<ModalWindow isShow={isActive} title={'PopUp'} closeModal={() => setIsActive(false)}>
-							<FormComponent item={developer} />
-						</ModalWindow>
-					)}
 				</div>
 			))}
+
+			{isActive && (
+				<ModalWindow isShow={isActive} title={'PopUp'} closeModal={() => setIsActive(false)}>
+					<FormComponent
+						closeModal={() => setIsActive(false)}
+						item={tables[fromNumber + activeIndex - 1]}
+						suggestions={suggestions}
+					/>
+				</ModalWindow>
+			)}
 		</div>
 	);
 };

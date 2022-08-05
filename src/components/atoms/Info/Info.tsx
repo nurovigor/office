@@ -1,20 +1,39 @@
 import React from 'react';
-import { FormPropsI } from 'src/components/atoms/Form/FormComponent';
-import { Row, Name, Property } from './styles';
+import { Name, Property, Row } from './styles';
+import { TableTypeI } from 'src/store/nodes/officeNode';
 
 type InfoPropsType = {
-	infoData: FormPropsI;
+	table: TableTypeI;
 };
 
-export const Info: React.FC<InfoPropsType> = ({ infoData }) => {
-	const count = Object.keys(infoData) as (keyof typeof infoData)[];
+const items = [
+	'number',
+	'openSpaceNumber',
+	'pc',
+	'monitor',
+	'keyboard',
+	'mouse',
+	'microphone',
+	'headphones',
+	'camera'
+];
+
+export const Info: React.FC<InfoPropsType> = ({ table }) => {
+	let count = Object.keys(table) as (keyof TableTypeI)[];
+	count = count.filter((item) => items.includes(item));
 
 	return (
 		<div>
+			<div className={Row}>
+				<div className={Name}>developer:</div>
+				<div className={Property}>
+					{table.developer ? `${table.developer.firstName} ${table.developer.lastName}` : 'null'}
+				</div>
+			</div>
 			{count.map((property, index) => (
 				<div key={index} className={Row}>
 					<div className={Name}>{property}:</div>
-					<div className={Property}>{infoData[property]}</div>
+					<div className={Property}>{`${table[property]}`}</div>
 				</div>
 			))}
 		</div>
