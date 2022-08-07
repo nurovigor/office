@@ -8,3 +8,5 @@ export type LinkType = {
 export type RotateType = 0 | 90 | 180 | 270;
 
 export type DirectionType = 'top' | 'right' | 'bottom' | 'left';
+
+export type Nullable<T> = null | T;

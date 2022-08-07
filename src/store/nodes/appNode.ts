@@ -1,13 +1,13 @@
 import { node } from 'redux-nodes';
+import { Nullable } from 'src/types/types';
 
 export const appNode = node(
 	{
 		//initialState
-		count: 0
+		error: 'Some error' as Nullable<string>
 	},
 	{
 		//actions
-		increment: (state) => state.count++,
-		decrement: (state) => state.count--
+		setError: (state, error: Nullable<string>) => (state.error = error)
 	}
 );

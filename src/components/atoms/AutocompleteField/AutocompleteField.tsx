@@ -9,9 +9,10 @@ import {
 	Input,
 	Delete
 } from './styles';
+import { SuggestionType } from 'src/components/atoms/Form/FormComponent';
 
 type AutocompleteFieldPropType = {
-	suggestions: string[];
+	suggestions: SuggestionType[];
 };
 
 const ENTER = 13;
@@ -25,7 +26,7 @@ export const AutocompleteField: React.FC<AutocompleteFieldPropType & FieldProps>
 	...props
 }) => {
 	const [activeSuggestion, setActiveSuggestion] = useState(0);
-	const [filteredSuggestions, setFilteredSuggestions] = useState<string[]>([]);
+	const [filteredSuggestions, setFilteredSuggestions] = useState<SuggestionType[]>([]);
 	const [showSuggestions, setShowSuggestions] = useState(false);
 	const [userInput, setUserInput] = useState(values[field.name]);
 	const [isShowInput, setShowInput] = useState(false);
@@ -34,7 +35,7 @@ export const AutocompleteField: React.FC<AutocompleteFieldPropType & FieldProps>
 		const userInput = e.currentTarget.value;
 
 		const filteredSuggestions = suggestions.filter((suggestion) =>
-			suggestion.toLowerCase().includes(userInput.toLowerCase())
+			suggestion.fullName.toLowerCase().includes(userInput.toLowerCase())
 		);
 
 		setActiveSuggestion(0);
@@ -43,13 +44,13 @@ export const AutocompleteField: React.FC<AutocompleteFieldPropType & FieldProps>
 		setUserInput(e.currentTarget.value);
 	};
 
-	const onClickHandle = (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
+	const onClickHandle = (e: React.MouseEvent<HTMLLIElement, MouseEvent>, id: string) => {
 		setActiveSuggestion(0);
 		setFilteredSuggestions([]);
 		setShowSuggestions(false);
 		setUserInput(e.currentTarget.innerText);
 		setShowInput(false);
-		setValues({ ...values, [field.name]: e.currentTarget.innerText });
+		setValues({ ...values, [field.name]: e.currentTarget.innerText, id });
 		setErrors({ ...errors, [field.name]: '' });
 	};
 
@@ -58,20 +59,24 @@ export const AutocompleteField: React.FC<AutocompleteFieldPropType & FieldProps>
 			setActiveSuggestion(0);
 			setShowSuggestions(false);
 			setUserInput(filteredSuggestions[activeSuggestion]);
-			setValues({ ...values, [field.name]: filteredSuggestions[activeSuggestion] });
+			setValues({
+				...values,
+				[field.name]: filteredSuggestions[activeSuggestion].fullName,
+				id: filteredSuggestions[activeSuggestion].id
+			});
 			setShowInput(false);
 		} else if (e.keyCode === UP) {
 			if (activeSuggestion === 0) {
 				return;
 			}
 			setActiveSuggestion(activeSuggestion - 1);
-			setUserInput(filteredSuggestions[activeSuggestion - 1]);
+			setUserInput(filteredSuggestions[activeSuggestion - 1].fullName);
 		} else if (e.keyCode === DOWN) {
 			if (activeSuggestion === filteredSuggestions.length - 1) {
 				return;
 			}
 			setActiveSuggestion(activeSuggestion + 1);
-			setUserInput(filteredSuggestions[activeSuggestion + 1]);
+			setUserInput(filteredSuggestions[activeSuggestion + 1].fullName);
 		}
 	};
 
@@ -88,8 +93,12 @@ export const AutocompleteField: React.FC<AutocompleteFieldPropType & FieldProps>
 							className = SuggestionActive;
 						}
 						return (
-							<li className={className} key={suggestion} onClick={onClickHandle}>
-								{suggestion}
+							<li
+								className={className}
+								key={suggestion.id}
+								onClick={(e) => onClickHandle(e, suggestion.id)}
+							>
+								{suggestion.fullName}
 							</li>
 						);
 					})}

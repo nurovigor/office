@@ -8,6 +8,10 @@ export const tableStyle = css`
 	cursor: pointer;
 
 	&:hover {
+		background-image: url('../../../assets/tableHover.png');
+	}
+
+	&.Active {
 		background-image: url('../../../assets/activeTable.png');
 	}
 

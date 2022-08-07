@@ -5,4 +5,5 @@ export const headerBlock = css`
 	justify-content: space-around;
 	padding: 20px;
 	box-shadow: inset 0 -3px 0 0 cornflowerblue;
+	margin-bottom: 20px;
 `;
