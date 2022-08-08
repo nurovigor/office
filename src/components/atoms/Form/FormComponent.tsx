@@ -4,8 +4,7 @@ import * as Yup from 'yup';
 import { AutocompleteField } from 'src/components/atoms/AutocompleteField';
 import { Button } from 'src/components/atoms/Button';
 import cn from 'classnames';
-import { TableTypeI } from 'src/store/nodes/officeNode';
-import { useAppDispatch } from 'src/hooks';
+import { useAppDispatch, useAppSelector } from 'src/hooks';
 import { updateTable } from 'src/store/thunks';
 import { Container, Errors, FormRow, Input } from './styles';
 import { Nullable } from 'src/types/types';
@@ -31,13 +30,13 @@ export type SuggestionType = {
 };
 
 type FormComponentPropsType = {
-	item: TableTypeI;
+	tableId: string;
 	suggestions: SuggestionType[];
 	closeModal: () => void;
 };
 
 export const FormComponent: React.FC<FormComponentPropsType> = ({
-	item,
+	tableId,
 	suggestions,
 	closeModal
 }) => {
@@ -52,18 +51,21 @@ export const FormComponent: React.FC<FormComponentPropsType> = ({
 		camera: Yup.string().required('Camera is required')
 	});
 
+	const table = useAppSelector((state) => state.officeNode.tables[tableId]);
 	const dispatch = useAppDispatch();
 
 	const initialValues = {
-		developer: item.developer ? `${item.developer.firstName} ${item.developer.lastName}` : 'null',
-		pc: item.pc || 'null',
-		monitor: item.monitor || 'null',
-		keyboard: item.keyboard || 'null',
-		mouse: item.mouse || 'null',
-		microphone: item.microphone || 'null',
-		headphones: item.headphones || 'null',
-		camera: item.camera || 'null',
-		id: item.developer ? item.developer._id : 'null'
+		developer: table.developer
+			? `${table.developer.firstName} ${table.developer.lastName}`
+			: 'null',
+		pc: table.pc || 'null',
+		monitor: table.monitor || 'null',
+		keyboard: table.keyboard || 'null',
+		mouse: table.mouse || 'null',
+		microphone: table.microphone || 'null',
+		headphones: table.headphones || 'null',
+		camera: table.camera || 'null',
+		id: table.developer ? table.developer._id : 'null'
 	};
 
 	const items: (keyof FormI)[] = [
@@ -86,7 +88,7 @@ export const FormComponent: React.FC<FormComponentPropsType> = ({
 				monitor: values.monitor,
 				mouse: values.mouse,
 				pc: values.pc,
-				tableId: item._id,
+				tableId: table._id,
 				developerId: values.id
 			})
 		);

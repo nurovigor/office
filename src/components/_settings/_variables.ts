@@ -8,7 +8,8 @@ export const colors = {
 	observatory: '#008f68',
 	bloodline: '#8F2000',
 	success: '#5cb85c',
-	error: '#d9534f'
+	error: '#d9534f',
+	mediumTurquoise: '#4ECDC4'
 };
 
 export const boxShadow = {

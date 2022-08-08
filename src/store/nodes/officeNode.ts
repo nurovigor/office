@@ -3,33 +3,18 @@ import { Nullable } from 'src/types/types';
 
 export const officeNode = node(
 	{
-		tables: [] as TableTypeI[],
+		ids: [] as string[],
+		tables: {} as TableType,
 		developers: [] as DeveloperType[]
 	},
 	{
 		//actions
-		setTables: (state, tables: TableTypeI[]) => (state.tables = tables),
+		setIds: (state, ids: string[]) => (state.ids = ids),
+		setTables: (state, tables: TableType) => (state.tables = tables),
 		setDevs: (state, devs: DeveloperType[]) => (state.developers = devs),
 		setUpdateTable: (state, updatedTable: TableTypeI) =>
-			(state.tables = state.tables.map((table) =>
-				table._id === updatedTable._id ? updatedTable : table
-			)),
-		removeDeveloper: (state, id: string, devId?: string) => {
-			if (devId) {
-				return (state.tables = state.tables.map((table) =>
-					table.developer && table.developer._id === devId
-						? {
-							...table,
-							developer: null
-						  }
-						: table
-				));
-			}
-
-			return (state.tables = state.tables.map((table) =>
-				table._id === id ? { ...table, developer: null } : table
-			));
-		}
+			(state.tables[updatedTable._id] = updatedTable),
+		removeDevOldTable: (state, tableId: string) => (state.tables[tableId].developer = null)
 	}
 );
 
@@ -54,4 +39,8 @@ export type DeveloperType = {
 	lastName: string;
 	phone: string;
 	_v: number;
+};
+
+export type TableType = {
+	[key: string]: TableTypeI;
 };

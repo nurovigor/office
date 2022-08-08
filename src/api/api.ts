@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { Nullable } from 'src/types/types';
+import { DeveloperType, TableTypeI } from 'src/store/nodes/officeNode';
 
 const instance = axios.create({
 	baseURL: 'http://localhost:3003/api/',
@@ -11,7 +12,7 @@ const instance = axios.create({
 
 export const tablesApi = {
 	getTables() {
-		return instance.get('tables').then((res) => res.data);
+		return instance.get<TableTypeI[]>('tables').then((res) => res.data);
 	},
 	updateTable(data: UpdateDataType) {
 		const { tableId } = data;
@@ -21,7 +22,7 @@ export const tablesApi = {
 
 export const developersApi = {
 	getDevelopers() {
-		return instance.get('developers').then((res) => res.data);
+		return instance.get<DeveloperType[]>('developers').then((res) => res.data);
 	}
 };
 

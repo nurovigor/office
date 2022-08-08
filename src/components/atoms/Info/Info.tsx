@@ -1,9 +1,10 @@
 import React from 'react';
 import { Name, Property, Row } from './styles';
 import { TableTypeI } from 'src/store/nodes/officeNode';
+import { useAppSelector } from 'src/hooks';
 
 type InfoPropsType = {
-	table: TableTypeI;
+	tableId: string;
 };
 
 const items = [
@@ -18,7 +19,8 @@ const items = [
 	'camera'
 ];
 
-export const Info: React.FC<InfoPropsType> = ({ table }) => {
+export const Info: React.FC<InfoPropsType> = ({ tableId }) => {
+	const table = useAppSelector((state) => state.officeNode.tables[tableId]);
 	let count = Object.keys(table) as (keyof TableTypeI)[];
 	count = count.filter((item) => items.includes(item));
 
