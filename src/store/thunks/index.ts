@@ -18,7 +18,12 @@ export const updateTable = (data: UpdateDataType): AppThunk => (dispatch) => {
 	tablesApi
 		.updateTable(data)
 		.then((data) => {
-			dispatch(actions.officeNode.removeDeveloper(data.tableId));
+			if (data.developer) {
+				dispatch(actions.officeNode.removeDeveloper(data._id, data.developer._id));
+			} else {
+				dispatch(actions.officeNode.removeDeveloper(data._id));
+			}
+
 			dispatch(actions.officeNode.setUpdateTable(data));
 		})
 		.catch(() => {

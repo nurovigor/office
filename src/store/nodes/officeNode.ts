@@ -14,10 +14,22 @@ export const officeNode = node(
 			(state.tables = state.tables.map((table) =>
 				table._id === updatedTable._id ? updatedTable : table
 			)),
-		removeDeveloper: (state, id: string) =>
-			(state.tables = state.tables.map((table) =>
+		removeDeveloper: (state, id: string, devId?: string) => {
+			if (devId) {
+				return (state.tables = state.tables.map((table) =>
+					table.developer && table.developer._id === devId
+						? {
+							...table,
+							developer: null
+						  }
+						: table
+				));
+			}
+
+			return (state.tables = state.tables.map((table) =>
 				table._id === id ? { ...table, developer: null } : table
-			))
+			));
+		}
 	}
 );
 
