@@ -6,15 +6,24 @@ import { Header, links } from './components/molecules/Header';
 import { Floor } from './components/molecules/Floor';
 import './App.css';
 import { floors } from './routes/floors';
-import { useAppDispatch } from 'src/hooks';
-import { appThunk } from 'src/store/thunks';
+import { useAppDispatch, useAppSelector } from 'src/hooks';
+import { appThunk, setAppError } from 'src/store/thunks';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
+	const error = useAppSelector((state) => state.appNode.error);
 	const dispatch = useAppDispatch();
 
 	useEffect(() => {
 		dispatch(appThunk());
 	}, []);
+
+	const notify = () => toast.error(error, { onClose: () => dispatch(setAppError(null)) });
+
+	useEffect(() => {
+		notify();
+	}, [error]);
 
 	return (
 		<>
@@ -31,6 +40,7 @@ function App() {
 				</Route>
 				<Route path={'/technics'} element={<Technics />} />
 			</Routes>
+			<ToastContainer position="bottom-right" />
 		</>
 	);
 }

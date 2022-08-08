@@ -4,7 +4,7 @@ import { Nullable } from 'src/types/types';
 export const appNode = node(
 	{
 		//initialState
-		error: 'Some error' as Nullable<string>
+		error: null as Nullable<string>
 	},
 	{
 		//actions
