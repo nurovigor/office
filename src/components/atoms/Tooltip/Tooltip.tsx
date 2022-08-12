@@ -1,6 +1,6 @@
 import React, { ReactNode, useEffect, useState, useRef } from 'react';
 import { TooltipTip, TooltipWrapper } from './styles';
-import { DirectionType } from 'src/types/types';
+import { DirectionType } from 'src/common/types/types';
 import cn from 'classnames';
 import { Button } from 'src/components/atoms/Button';
 

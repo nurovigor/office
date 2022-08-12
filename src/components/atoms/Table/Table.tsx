@@ -1,21 +1,18 @@
 import React from 'react';
-import { DirectionType } from 'src/types/types';
+import { DirectionType } from 'src/common/types/types';
 import { tableStyle } from './styles';
 import cn from 'classnames';
-import { useAppSelector } from 'src/hooks';
 
 type LinkPropsType = {
 	direction: DirectionType;
-	tableId: string;
+	isActive: boolean;
 };
 
-export const Table: React.FC<LinkPropsType> = ({ direction, tableId }) => {
-	const table = useAppSelector((state) => state.officeNode.tables[tableId]);
-
+export const Table: React.FC<LinkPropsType> = ({ direction, isActive }) => {
 	return (
 		<div
 			className={cn(tableStyle, {
-				Active: !!table.developer
+				Active: isActive
 			})}
 			data-direction={direction}
 		></div>

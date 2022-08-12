@@ -3,10 +3,6 @@ import { appNode } from './appNode';
 import { officeNode } from './officeNode';
 import { technicsNode } from './technicsNode';
 
-export { appNode } from './appNode';
-export { officeNode } from './officeNode';
-export { technicsNode } from './technicsNode';
-
 export default buildNodes({
 	appNode,
 	officeNode,

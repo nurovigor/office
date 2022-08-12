@@ -1,29 +1,39 @@
-import React, { useCallback, useState } from 'react';
-import { Table } from 'src/components/atoms/Table';
+import React, { useCallback, useMemo, useState } from 'react';
+import { DeveloperType } from 'src/store/nodes/officeNode';
 import { Tooltip } from 'src/components/atoms/Tooltip';
 import { ModalWindow } from 'src/components/atoms/ModalWindow';
-import { FormComponent } from 'src/components/atoms/Form';
-import { Info } from 'src/components/atoms/Info';
-import { useAppSelector } from 'src/hooks';
-import { DirectionType } from 'src/types/types';
+import { ConnectedTable } from 'src/pages/Office/ConnectedTable';
+import { ConnectedInfo } from 'src/components/molecules/Tables/ConnectedInfo';
+import { ConnectedForm } from 'src/pages/Office/ConnectedForm';
+import { DirectionType } from 'src/common/types/types';
 import { tablesBlock } from './styles';
 
 type TablesPropsType = {
 	count: number;
 	direction?: DirectionType;
 	fromNumber: number;
+	ids: string[];
+	devs: DeveloperType[];
 };
 
-export const Tables: React.FC<TablesPropsType> = ({ count, direction = 'top', fromNumber }) => {
-	const ids = useAppSelector((state) => state.officeNode.ids);
-	const devs = useAppSelector((state) => state.officeNode.developers);
+export const Tables: React.FC<TablesPropsType> = ({
+	count,
+	direction = 'top',
+	fromNumber,
+	ids,
+	devs
+}) => {
 	const [isActive, setIsActive] = useState(false);
 	const [activeIndex, setActiveIndex] = useState<number>(0);
 
-	const suggestions = devs.map((developer) => ({
-		fullName: `${developer.firstName} ${developer.lastName}`,
-		id: developer._id
-	}));
+	const suggestions = useMemo(
+		() =>
+			devs.map((developer) => ({
+				fullName: `${developer.firstName} ${developer.lastName}`,
+				id: developer._id
+			})),
+		[devs]
+	);
 
 	suggestions.push({ fullName: 'Empty', id: 'null' });
 
@@ -43,10 +53,10 @@ export const Tables: React.FC<TablesPropsType> = ({ count, direction = 'top', fr
 					<Tooltip
 						direction="top"
 						showModal={() => setActiveModalHandle(index)}
-						content={<Info tableId={ids[fromNumber + index - 1]} />}
+						content={<ConnectedInfo tableId={ids[fromNumber + index - 1]} />}
 					>
 						<div>
-							<Table direction={direction} tableId={ids[fromNumber + index - 1]} />
+							<ConnectedTable direction={direction} tableId={ids[fromNumber + index - 1]} />
 						</div>
 					</Tooltip>
 				</div>
@@ -54,7 +64,7 @@ export const Tables: React.FC<TablesPropsType> = ({ count, direction = 'top', fr
 
 			{isActive && (
 				<ModalWindow isShow={isActive} title={'PopUp'} closeModal={() => setIsActive(false)}>
-					<FormComponent
+					<ConnectedForm
 						closeModal={() => setIsActive(false)}
 						tableId={ids[fromNumber + activeIndex - 1]}
 						suggestions={suggestions}

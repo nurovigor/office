@@ -1,5 +1,5 @@
 import { node } from 'redux-nodes';
-import { Nullable } from 'src/types/types';
+import { Nullable } from 'src/common/types/types';
 
 export const officeNode = node(
 	{

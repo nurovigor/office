@@ -19,17 +19,3 @@ export const Table = css`
 		}
 	}
 `;
-
-export const TableHead = css`
-	 {
-		background-color: ${colors.primaryColor};
-	}
-`;
-
-export const TableBody = css`
-	 {
-		& tr:nth-of-type(even) td {
-			background-color: #cccee6;
-		}
-	}
-`;

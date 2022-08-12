@@ -1,42 +1,60 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { TableHeadItem } from 'src/components/atoms/TableHeadItem';
 import { TableRow } from 'src/components/atoms/TableRow';
-import { Table, TableHead, TableBody } from 'src/components/molecules/Spreadsheet/styles';
+import { Nullable } from 'src/common/types/types';
+import { Table } from 'src/components/molecules/Spreadsheet/styles';
 
 type SpreadsheetPropsType = {
 	theadData: any[];
 	tbodyData: any[];
+	selectedItemId: Nullable<string>;
+	// eslint-disable-next-line no-unused-vars
+	changeSelectedItem: (itemId: Nullable<string>) => void;
+	// eslint-disable-next-line no-unused-vars
+	handleSorting: (name: string, value: string) => void;
+	sortValues: string[];
 };
 
-export const Spreadsheet: React.FC<SpreadsheetPropsType> = ({ theadData, tbodyData }) => {
+export const Spreadsheet: React.FC<SpreadsheetPropsType> = ({
+	theadData,
+	tbodyData,
+	selectedItemId,
+	changeSelectedItem,
+	handleSorting,
+	sortValues
+}) => {
 	const [data, setData] = useState(tbodyData);
 
-	const compareBy = (key: string) => {
-		return function(a: any, b: any) {
-			if (a[key] < b[key]) return -1;
-			if (a[key] > b[key]) return 1;
-			return 0;
-		};
-	};
-
-	const sortBy = (key: string) => {
-		let arrayCopy = [...data];
-		arrayCopy.sort(compareBy(key.toLowerCase()));
-		setData([...arrayCopy]);
-	};
+	useEffect(() => {
+		setData(tbodyData);
+	}, [tbodyData]);
 
 	return (
 		<table className={Table}>
-			<thead className={TableHead}>
+			<thead>
 				<tr>
-					{theadData.map((head, index) => {
-						return <TableHeadItem callBack={sortBy} key={head + index} item={head} />;
+					{theadData.map((item) => {
+						return (
+							<TableHeadItem
+								handleSorting={handleSorting}
+								key={item.id}
+								item={item}
+								sortValues={sortValues}
+							/>
+						);
 					})}
 				</tr>
 			</thead>
-			<tbody className={TableBody}>
+			<tbody>
 				{data.map((item) => {
-					return <TableRow key={item.id} data={item} />;
+					return (
+						<TableRow
+							key={item._id}
+							data={item}
+							selectedId={selectedItemId}
+							changeSelectedItem={changeSelectedItem}
+						/>
+					);
 				})}
 			</tbody>
 		</table>

@@ -1,14 +1,18 @@
 import React from 'react';
 import {
-	workSpaceFour,
 	leftBottomBlock,
+	leftMiddleBlock,
 	rightBottomBlock,
 	rightMiddleBlock,
-	leftMiddleBlock
+	workSpaceFour
 } from './styles';
-import { Tables } from '../Tables';
+import { ConnectedTablesPropsType } from 'src/pages/Office/ConnectedTables';
 
-export const OpenSpaceFour = () => {
+type OpenSpaceFourProps = {
+	Tables: React.FC<ConnectedTablesPropsType>;
+};
+
+export const OpenSpaceFour: React.FC<OpenSpaceFourProps> = ({ Tables }) => {
 	return (
 		<div className={workSpaceFour}>
 			<Tables count={3} fromNumber={72} />

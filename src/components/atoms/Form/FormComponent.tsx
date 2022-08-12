@@ -1,13 +1,14 @@
 import React from 'react';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
+import cn from 'classnames';
+import { TableTypeI } from 'src/store/nodes/officeNode';
 import { AutocompleteField } from 'src/components/atoms/AutocompleteField';
 import { Button } from 'src/components/atoms/Button';
-import cn from 'classnames';
-import { useAppDispatch, useAppSelector } from 'src/hooks';
-import { updateTable } from 'src/store/thunks';
+import { useAppDispatch } from 'src/hooks';
+import { Nullable } from 'src/common/types/types';
 import { Container, Errors, FormRow, Input } from './styles';
-import { Nullable } from 'src/types/types';
+import { updateTable } from 'src/store/thunks';
 
 export interface FormI {
 	pc: string;
@@ -30,13 +31,13 @@ export type SuggestionType = {
 };
 
 type FormComponentPropsType = {
-	tableId: string;
+	table: TableTypeI;
 	suggestions: SuggestionType[];
 	closeModal: () => void;
 };
 
 export const FormComponent: React.FC<FormComponentPropsType> = ({
-	tableId,
+	table,
 	suggestions,
 	closeModal
 }) => {
@@ -51,7 +52,6 @@ export const FormComponent: React.FC<FormComponentPropsType> = ({
 		camera: Yup.string().required('Camera is required')
 	});
 
-	const table = useAppSelector((state) => state.officeNode.tables[tableId]);
 	const dispatch = useAppDispatch();
 
 	const initialValues = {

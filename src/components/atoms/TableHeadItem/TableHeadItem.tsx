@@ -1,19 +1,42 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from 'src/components/atoms/Button';
-import { Container, Btn } from './styles';
+import { Btn, Container, Sort, Up, Down } from './styles';
+import { cx } from '@linaria/core';
 
 type TableHeadItemPropsType = {
-	item: string;
+	item: any;
 	// eslint-disable-next-line no-unused-vars
-	callBack: (value: string) => void;
+	handleSorting: (sortName: string, value: string) => void;
+	sortValues: string[];
 };
 
-export const TableHeadItem: React.FC<TableHeadItemPropsType> = ({ item, callBack }) => {
+export const TableHeadItem: React.FC<TableHeadItemPropsType> = ({
+	item,
+	handleSorting,
+	sortValues
+}) => {
+	const [sortField, setSortField] = useState('');
+	const [order, setOrder] = useState('asc');
+
+	const handleSortingChange = (accessor: string) => {
+		const sortOrder = accessor === sortField && order === 'asc' ? 'desc' : 'asc';
+		setSortField(accessor);
+		setOrder(sortOrder);
+		handleSorting(accessor, sortOrder);
+	};
+
 	return (
-		<td title={item} className={Container}>
-			<Button onClick={() => callBack(item)} className={Btn}>
-				{item}
+		<td title={item.name} className={cx(Container)}>
+			<Button onClick={() => handleSortingChange(item.accessor)} className={Btn}>
+				{item.name}
 			</Button>
+			<div
+				className={cx(
+					Sort,
+					sortValues[0] === item.accessor && order === 'asc' && Up,
+					sortValues[0] === item.accessor && order === 'desc' && Down
+				)}
+			/>
 		</td>
 	);
 };

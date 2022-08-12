@@ -7,9 +7,13 @@ import {
 	leftBottomBlock,
 	middleBlock
 } from './styles';
-import { Tables } from '../Tables';
+import { ConnectedTablesPropsType } from 'src/pages/Office/ConnectedTables';
 
-export const OpenSpaceTwo = () => {
+type OpenSpaceTwoProps = {
+	Tables: React.FC<ConnectedTablesPropsType>;
+};
+
+export const OpenSpaceTwo: React.FC<OpenSpaceTwoProps> = ({ Tables }) => {
 	return (
 		<div className={workSpaceTwo}>
 			<div className={topBlocks}>

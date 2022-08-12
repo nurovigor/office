@@ -7,15 +7,16 @@ export const ButtonStyle = css`
 		width: 100%;
 		font-size: 20px;
 		background: ${colors.primaryColor};
-		border-radius: 4px;
 		border: none;
 		cursor: pointer;
 		padding: 5px 0;
 		margin-top: 20px;
+		transition: 0.3s;
 
 		&:hover {
-			background: rgba(${colors.primaryColor}, 0.8);
+			background-color: ${colors.success};
 		}
+
 		&.DisabledBtn {
 			cursor: not-allowed;
 			opacity: 0.5;

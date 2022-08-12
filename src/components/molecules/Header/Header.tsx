@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from '../../atoms/Link';
 import { headerBlock } from './styles';
-import { LinkType } from 'src/types/types';
+import { LinkType } from 'src/common/types/types';
 import { useLocation } from 'react-router-dom';
 
 type HeaderPropsType = {

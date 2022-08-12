@@ -1,15 +1,17 @@
 import React from 'react';
-import { OpenSpaceTwo } from '../OpenSpaceTwo';
-import { OpenSpaceFour } from '../OpenSpaceFour';
-import { OpenSpaceThree } from '../OpenSpaceThree';
-import { OpenSpaceOne } from 'src/components/molecules/OpenSpaceOne';
-import { OpenSpaceNumber } from 'src/types/types';
+import { OpenSpaceTwo } from './OpenSpaceTwo';
+import { OpenSpaceFour } from './OpenSpaceFour';
+import { OpenSpaceThree } from './OpenSpaceThree';
+import { OpenSpaceOne } from 'src/components/molecules/OpenSpace/OpenSpaceOne';
+import { OpenSpaceNumber } from 'src/common/types/types';
+import { ConnectedTablesPropsType } from 'src/pages/Office/ConnectedTables';
 
 type OpenSpacePropsType = {
 	number: OpenSpaceNumber;
+	Tables: React.FC<ConnectedTablesPropsType>;
 };
 
-export const OpenSpace: React.FC<OpenSpacePropsType> = ({ number }) => {
+export const OpenSpace: React.FC<OpenSpacePropsType> = ({ number, Tables }) => {
 	const OneOpenSpace = {
 		1: OpenSpaceOne,
 		2: OpenSpaceTwo,
@@ -17,5 +19,5 @@ export const OpenSpace: React.FC<OpenSpacePropsType> = ({ number }) => {
 		4: OpenSpaceFour
 	}[number];
 
-	return <OneOpenSpace />;
+	return <OneOpenSpace Tables={Tables} />;
 };

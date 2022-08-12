@@ -1,8 +1,12 @@
 import React from 'react';
-import { Tables } from '../Tables';
 import { workSpaceOne, topBlock, middleBlockOne, middleBlockOTwo, bottomBlock } from './styles';
+import { ConnectedTablesPropsType } from 'src/pages/Office/ConnectedTables';
 
-export const OpenSpaceOne = () => {
+type OpenSpaceOneProps = {
+	Tables: React.FC<ConnectedTablesPropsType>;
+};
+
+export const OpenSpaceOne: React.FC<OpenSpaceOneProps> = ({ Tables }) => {
 	return (
 		<div className={workSpaceOne}>
 			<div className={topBlock}>

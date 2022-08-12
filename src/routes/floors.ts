@@ -1,4 +1,4 @@
-import { OpenSpaceNumber } from '../types/types';
+import { OpenSpaceNumber } from '../common/types/types';
 // @ts-ignore
 import floorOne from 'src/assets/floor1.jpg';
 // @ts-ignore

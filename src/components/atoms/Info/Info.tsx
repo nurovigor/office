@@ -1,29 +1,13 @@
 import React from 'react';
-import { Name, Property, Row } from './styles';
 import { TableTypeI } from 'src/store/nodes/officeNode';
-import { useAppSelector } from 'src/hooks';
+import { Name, Property, Row } from './styles';
 
 type InfoPropsType = {
-	tableId: string;
+	table: TableTypeI;
+	count: (keyof TableTypeI)[];
 };
 
-const items = [
-	'number',
-	'openSpaceNumber',
-	'pc',
-	'monitor',
-	'keyboard',
-	'mouse',
-	'microphone',
-	'headphones',
-	'camera'
-];
-
-export const Info: React.FC<InfoPropsType> = ({ tableId }) => {
-	const table = useAppSelector((state) => state.officeNode.tables[tableId]);
-	let count = Object.keys(table) as (keyof TableTypeI)[];
-	count = count.filter((item) => items.includes(item));
-
+export const Info: React.FC<InfoPropsType> = ({ table, count }) => {
 	return (
 		<div>
 			<div className={Row}>
