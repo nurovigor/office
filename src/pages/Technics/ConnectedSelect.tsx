@@ -1,7 +1,7 @@
 import React from 'react';
-import { CustomSelect } from 'src/components/atoms/CustomSelect/CustomSelect';
 import { useAppDispatch, useAppSelector } from 'src/hooks';
 import { setFilterValue } from 'src/store/thunks/technic';
+import { CustomSelectV2 } from 'src/components/atoms/CustomSelect/CustomSelectV2';
 
 export const ConnectedSelect = () => {
 	const filter = useAppSelector((state) => state.technicsNode.filter);
@@ -14,10 +14,10 @@ export const ConnectedSelect = () => {
 	return (
 		<>
 			{filter.map((item, index) => (
-				<CustomSelect
+				<CustomSelectV2
 					selectedFilter={item.selectedOption}
 					key={index}
-					options={item.options}
+					optionsList={item.options}
 					filterName={item.name}
 					onChangeOption={onChangeFilter}
 				/>

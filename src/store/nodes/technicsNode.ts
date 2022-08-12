@@ -19,11 +19,15 @@ export const technicsNode = node(
 		//actions
 		setIds: (state, ids: string[]) => (state.ids = ids),
 		setTechnics: (state, technics: TechnicTypeI[]) => (state.technics = technics),
+		setTotalCount: (state, count: number) => (state.totalCountItems = count),
 		setCurrentPage: (state, currentPage: number) => (state.currentPage = currentPage),
 		setFilter: (state, filterName: string, filter: string) =>
 			(state[filterName as keyof FilterName] = filter),
-		setTotalCount: (state, count: number) => (state.totalCountItems = count),
 		setFilterOptions: (state, filterOptions: FilterType[]) => (state.filter = filterOptions),
+		setOption: (state, filterName: string, filter: string) =>
+			(state.filter = state.filter.map((item) =>
+				item.name === filterName ? { ...item, selectedOption: filter } : item
+			)),
 		setSort: (state, name: string, value: string) => (state.sort = [name, value])
 	}
 );

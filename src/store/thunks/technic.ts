@@ -33,6 +33,7 @@ export const setCurrentPage = (pageNumber: number): AppThunk => (dispatch) => {
 
 export const setFilterValue = (filterName: string, filter: string): AppThunk => (dispatch) => {
 	dispatch(actions.technicsNode.setFilter(filterName, filter));
+	dispatch(actions.technicsNode.setOption(filterName, filter));
 	dispatch(actions.technicsNode.setCurrentPage(1));
 	dispatch(getTechnics());
 };
