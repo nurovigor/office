@@ -95,7 +95,7 @@ export const AutocompleteField: React.FC<AutocompleteFieldPropType & FieldProps>
 						return (
 							<li
 								className={className}
-								key={suggestion.id}
+								key={index}
 								onClick={(e) => onClickHandle(e, suggestion.id)}
 							>
 								{suggestion.fullName}

@@ -4,9 +4,9 @@ import { Tooltip } from 'src/components/atoms/Tooltip';
 import { ModalWindow } from 'src/components/atoms/ModalWindow';
 import { ConnectedTable } from 'src/pages/Office/ConnectedTable';
 import { ConnectedInfo } from 'src/components/molecules/Tables/ConnectedInfo';
-import { ConnectedForm } from 'src/pages/Office/ConnectedForm';
 import { DirectionType } from 'src/common/types/types';
 import { tablesBlock } from './styles';
+import { ConnectedForm } from 'src/pages/Office/ConnectedForm';
 
 type TablesPropsType = {
 	count: number;
@@ -34,8 +34,6 @@ export const Tables: React.FC<TablesPropsType> = ({
 			})),
 		[devs]
 	);
-
-	suggestions.push({ fullName: 'Empty', id: 'null' });
 
 	const setActiveModalHandle = useCallback((idx: number) => {
 		setActiveIndex(idx);

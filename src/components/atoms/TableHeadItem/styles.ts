@@ -34,9 +34,14 @@ export const Sort = css`
 
 export const Up = css`
 	background-image: url('../../../assets/up-arrow.png');
-	color: white;
+	width: 40px;
+	height: 40px;
+	transition: all 0.4s ease;
 `;
 export const Down = css`
-	background-image: url('../../../assets/down-arrow.png');
-	color: green;
+	background-image: url('../../../assets/up-arrow.png');
+	width: 40px;
+	height: 40px;
+	transition: all 0.4s ease;
+	transform: rotateZ(-180deg);
 `;
