@@ -17,9 +17,21 @@ export const ButtonStyle = css`
 			background-color: ${colors.success};
 		}
 
-		&.DisabledBtn {
+		&[disabled]:hover {
+			background: ${colors.primaryColor};
+		}
+
+		&[disabled] {
 			cursor: not-allowed;
 			opacity: 0.5;
 		}
+	}
+`;
+
+export const SkeletonBlock = css`
+	display: flex;
+
+	& div {
+		margin-left: 10px;
 	}
 `;

@@ -63,3 +63,10 @@ export const Opt = css`
 		color: ${colors.white};
 	}
 `;
+
+export const Preloader = css`
+	display: flex;
+	& div {
+		margin-right: 10px;
+	}
+`;

@@ -12,20 +12,13 @@ export type Ref = HTMLButtonElement;
 export type Props = DefaultButtonPropsType & {
 	children: string;
 	icon?: React.ReactElement;
-	disabled?: boolean;
 };
 
 // eslint-disable-next-line react/display-name
 export const Button = forwardRef<Ref, Props>((props, ref) => {
-	const { children, icon, disabled, ...rest } = props;
+	const { children, icon, ...rest } = props;
 	return (
-		<button
-			ref={ref}
-			className={cn(ButtonStyle, {
-				DisabledBtn: disabled
-			})}
-			{...rest}
-		>
+		<button ref={ref} className={cn(ButtonStyle)} {...rest}>
 			<span>{icon}</span>
 			{children}
 		</button>

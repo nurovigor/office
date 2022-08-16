@@ -44,5 +44,12 @@ export const BtnBlock = css`
 export const PaginationBlock = css`
 	position: absolute;
 	bottom: -65px;
-	right: 16px;
+	right: 20px;
+`;
+
+export const SpreadsheetBlock = css`
+	display: flex;
+	& div {
+		margin: 1px;
+	}
 `;
