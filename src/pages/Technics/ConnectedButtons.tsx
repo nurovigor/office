@@ -9,7 +9,7 @@ type ConnectedButtonsProps = {
 };
 
 export const ConnectedButtons: React.FC<ConnectedButtonsProps> = ({ showModal }) => {
-	const technics = useAppSelector((state) => state.technicsNode.technics);
+	const { isFetching, technics } = useAppSelector((state) => state.technicsNode);
 	const selectedItem = useAppSelector((state) => state.technicsNode.selectedItem);
 
 	const dispatch = useAppDispatch();
@@ -22,11 +22,11 @@ export const ConnectedButtons: React.FC<ConnectedButtonsProps> = ({ showModal })
 
 	const item = technics.find((item) => item._id === selectedItem);
 
-	const canBeDeleted = item?.bind || !selectedItem;
+	const canBeDeleted = item?.bind === 'Yes' || !selectedItem;
 
 	return (
 		<>
-			{technics.length ? (
+			{!isFetching ? (
 				<>
 					<Button disabled={!!selectedItem} onClick={() => showModal(true)}>
 						Add

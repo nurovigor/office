@@ -8,13 +8,14 @@ export const technicsNode = node(
 		technics: [] as TechnicTypeI[],
 		currentPage: 1 as number,
 		totalCountItems: 0 as number,
-		pageSize: 10,
+		pageSize: 15,
 		filter: [] as FilterType[],
 		name: '' as string,
 		type: '' as string,
 		bind: '' as string,
 		sort: [] as string[],
-		selectedItem: null as Nullable<string>
+		selectedItem: null as Nullable<string>,
+		isFetching: false
 	},
 	{
 		//actions
@@ -34,6 +35,7 @@ export const technicsNode = node(
 		removeItem: (state, id) => (state.technics = state.technics.filter((item) => item._id !== id)),
 		updateItem: (state, id: string, updatedItem: TechnicTypeI) =>
 			(state.technics = state.technics.map((item) => (item._id === id ? updatedItem : item))),
-		addNewItem: (state, newItem: TechnicTypeI) => (state.technics = [...state.technics, newItem])
+		addNewItem: (state, newItem: TechnicTypeI) => (state.technics = [...state.technics, newItem]),
+		setIsFetching: (state, status: boolean) => (state.isFetching = status)
 	}
 );

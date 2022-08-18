@@ -34,7 +34,9 @@ export const ConnectedSpreadsheet: React.FC<ConnectedSpreadsheetProps> = ({
 	isActive,
 	closeModal
 }) => {
-	const { technics, sort, selectedItem } = useAppSelector((state) => state.technicsNode);
+	const { technics, sort, selectedItem, isFetching } = useAppSelector(
+		(state) => state.technicsNode
+	);
 
 	const item = technics.find((item) => item._id === selectedItem);
 
@@ -50,7 +52,7 @@ export const ConnectedSpreadsheet: React.FC<ConnectedSpreadsheetProps> = ({
 
 	return (
 		<div>
-			{technics.length ? (
+			{!isFetching ? (
 				<Spreadsheet
 					theadData={headerData}
 					tbodyData={technics}

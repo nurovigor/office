@@ -12,7 +12,7 @@ export const FormRow = css`
 		position: relative;
 		display: flex;
 		align-content: center;
-		margin-bottom: 20px;
+		margin-bottom: 30px;
 		box-sizing: border-box;
 		width: 100%;
 		& label {

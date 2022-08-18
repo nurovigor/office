@@ -6,7 +6,7 @@ import { Container, Errors, FormRow, Input } from 'src/components/atoms/Form/sty
 import cn from 'classnames';
 import { Button } from 'src/components/atoms/Button';
 import { useAppDispatch } from 'src/hooks';
-import { createItem, updateItem } from 'src/store/thunks/technic';
+import { updateOrCreateItem } from 'src/store/thunks/technic';
 
 type TechnicFormProps = {
 	item?: TechnicTypeI;
@@ -18,33 +18,34 @@ export const TechnicForm: React.FC<TechnicFormProps> = ({ item, closeModal }) =>
 		name: Yup.string().required('Name is required'),
 		type: Yup.string().required('Type is required'),
 		serial: Yup.string(),
-		bind: Yup.boolean()
+		bind: Yup.string()
 	});
 
 	const initialValues: InitialValuesType = {
 		name: item?.name || '',
 		type: item?.type || '',
 		serial: item?.serial || '',
-		bind: item?.bind || false
+		bind: item?.bind || 'No'
 	};
 
 	type InitialValuesType = {
 		name: string;
 		type: string;
 		serial: string;
-		bind: boolean;
+		bind: string;
 	};
 
 	const dispatch = useAppDispatch();
 
-	const submitForm = (values: InitialValuesType, { resetForm }: any) => {
-		if (item) {
-			dispatch(updateItem(item._id, values));
-		} else {
-			dispatch(createItem(values));
-		}
-		resetForm();
-		closeModal(false);
+	const submitForm = (values: InitialValuesType, { resetForm, setErrors }: any) => {
+		dispatch(updateOrCreateItem(item ? item?._id : null, values)).then((data) => {
+			if (!data._id) {
+				setErrors({ ...data });
+			} else {
+				resetForm();
+				closeModal(false);
+			}
+		});
 	};
 
 	return (

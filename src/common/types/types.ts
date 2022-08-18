@@ -39,7 +39,7 @@ export type GetTechnics = {
 };
 
 export interface TechnicTypeI {
-	bind: boolean;
+	bind: string;
 	name: Nullable<string>;
 	serial: Nullable<string>;
 	type: Nullable<string>;
@@ -57,5 +57,5 @@ export type CreateDataResponse = {
 	name: string;
 	type: string;
 	serial: string;
-	bind: boolean;
+	bind: string;
 };
