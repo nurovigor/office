@@ -5,7 +5,6 @@ import { cx } from '@linaria/core';
 
 type TableHeadItemPropsType = {
 	item: any;
-	// eslint-disable-next-line no-unused-vars
 	handleSorting: (sortName: string, value: string) => void;
 	sortValues: string[];
 };

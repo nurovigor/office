@@ -9,7 +9,6 @@ type PaginationPropsType = {
 	pageSize: number;
 	siblingCount?: number;
 	currentPage: number;
-	// eslint-disable-next-line no-unused-vars
 	onPageChange(value: number): void;
 };
 export const Pagination: React.FC<PaginationPropsType> = ({

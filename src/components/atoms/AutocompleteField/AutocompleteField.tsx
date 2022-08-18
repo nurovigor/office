@@ -10,6 +10,7 @@ import {
 	Delete
 } from './styles';
 import { SuggestionType } from 'src/components/atoms/Form/FormComponent';
+import { Nullable } from 'src/common/types/types';
 
 type AutocompleteFieldPropType = {
 	suggestions: SuggestionType[];
@@ -44,7 +45,7 @@ export const AutocompleteField: React.FC<AutocompleteFieldPropType & FieldProps>
 		setUserInput(e.currentTarget.value);
 	};
 
-	const onClickHandle = (e: React.MouseEvent<HTMLLIElement, MouseEvent>, id: string) => {
+	const onClickHandle = (e: React.MouseEvent<HTMLLIElement, MouseEvent>, id: Nullable<string>) => {
 		setActiveSuggestion(0);
 		setFilteredSuggestions([]);
 		setShowSuggestions(false);

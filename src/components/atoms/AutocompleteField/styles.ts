@@ -62,7 +62,7 @@ export const SelectBlock = css`
 	 {
 		position: relative;
 		box-sizing: border-box;
-		height: 30px;
+		min-height: 30px;
 		border-radius: 4px;
 		padding: 5px 10px;
 		font-size: 1rem;

@@ -4,7 +4,6 @@ import { cx } from '@linaria/core';
 
 type CustomSelectV2Props = {
 	optionsList: string[];
-	// eslint-disable-next-line no-unused-vars
 	onChangeOption: (filterName: string, option: string) => void;
 	filterName: string;
 	selectedFilter: string;
@@ -21,7 +20,8 @@ export const CustomSelectV2: React.FC<CustomSelectV2Props> = ({
 	const ref = useRef<HTMLTableRowElement>(null);
 
 	useEffect(() => {
-		const checkIfClickedOutside = (e: any) => {
+		const checkIfClickedOutside = (e: MouseEvent) => {
+			// @ts-ignore
 			if (isOptionsOpen && ref.current && !ref.current.contains(e.target)) {
 				setIsOptionsOpen(false);
 			}

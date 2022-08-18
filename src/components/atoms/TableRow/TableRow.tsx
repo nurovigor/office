@@ -1,12 +1,11 @@
-import React, { useEffect, useRef } from 'react';
-import { Nullable } from 'src/common/types/types';
-import { Container, Active } from './styles';
+import React, { useRef } from 'react';
+import { Nullable, TechnicTypeI } from 'src/common/types/types';
+import { Active, Container } from './styles';
 import { cx } from '@linaria/core';
 
 type TableRowPropsType = {
-	data: any;
+	data: TechnicTypeI;
 	selectedId: Nullable<string>;
-	// eslint-disable-next-line no-unused-vars
 	changeSelectedItem: (itemId: Nullable<string>) => void;
 };
 
@@ -17,20 +16,21 @@ export const TableRow: React.FC<TableRowPropsType> = ({ data, selectedId, change
 
 	const boxRef = useRef<HTMLTableRowElement>(null);
 
-	useEffect(() => {
+	/*useEffect(() => {
 		const handleClickOutside = (event: MouseEvent) => {
 			// @ts-ignore
 			if (boxRef.current && boxRef.current.contains(event.target)) {
 				onHandleClick();
 				return;
 			}
+
 			changeSelectedItem(null);
 		};
 		document.addEventListener('click', handleClickOutside, true);
 		return () => {
 			document.removeEventListener('click', handleClickOutside, true);
 		};
-	});
+	});*/
 
 	return (
 		<tr

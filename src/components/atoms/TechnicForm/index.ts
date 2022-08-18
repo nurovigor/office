@@ -1,0 +1,1 @@
+export { TechnicForm } from './TechnicForm';

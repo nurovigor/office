@@ -19,14 +19,14 @@ export type FilterName = {
 
 export type UpdateDataType = {
 	developerId: Nullable<string>;
-	tableId: string;
-	pc: string;
-	monitor: string;
-	keyboard: string;
-	mouse: string;
-	microphone: string;
-	headphones: string;
-	camera: string;
+	tableId: Nullable<string>;
+	pc: Nullable<string>;
+	monitor: Nullable<string>;
+	keyboard: Nullable<string>;
+	mouse: Nullable<string>;
+	microphone: Nullable<string>;
+	headphones: Nullable<string>;
+	camera: Nullable<string>;
 };
 
 export type GetTechnics = {
@@ -39,16 +39,23 @@ export type GetTechnics = {
 };
 
 export interface TechnicTypeI {
-	_id: string;
+	bind: boolean;
 	name: Nullable<string>;
-	type: Nullable<string>;
-	bounded: boolean;
 	serial: Nullable<string>;
+	type: Nullable<string>;
 	__v: number;
+	_id: string;
 }
 
 export type FilterType = {
 	name: string;
 	selectedOption: string;
 	options: string[];
+};
+
+export type CreateDataResponse = {
+	name: string;
+	type: string;
+	serial: string;
+	bind: boolean;
 };

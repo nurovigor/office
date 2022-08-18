@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useAppDispatch, useAppSelector } from 'src/hooks';
 import { Nullable } from 'src/common/types/types';
 import { Spreadsheet } from 'src/components/molecules/Spreadsheet';
-import { setSortValue } from 'src/store/thunks';
+import { setSelectedItem, setSortValue } from 'src/store/thunks';
 import { SkeletonSpreadsheet } from 'src/components/molecules/Spreadsheet/SkeletonSpreadsheet';
+import { ModalWindow } from 'src/components/atoms/ModalWindow';
+import { TechnicForm } from 'src/components/atoms/TechnicForm';
 
 const headerData = [
 	{
@@ -23,14 +25,27 @@ const headerData = [
 	}
 ];
 
-export const ConnectedSpreadsheet = () => {
-	const { technics, sort } = useAppSelector((state) => state.technicsNode);
-	const [selectedItemId, setSelectedItemId] = useState<Nullable<string>>(null);
+type ConnectedSpreadsheetProps = {
+	isActive: boolean;
+	closeModal: (value: boolean) => void;
+};
+
+export const ConnectedSpreadsheet: React.FC<ConnectedSpreadsheetProps> = ({
+	isActive,
+	closeModal
+}) => {
+	const { technics, sort, selectedItem } = useAppSelector((state) => state.technicsNode);
+
+	const item = technics.find((item) => item._id === selectedItem);
 
 	const dispatch = useAppDispatch();
 
 	const handleSorting = (name: string, value: string) => {
 		dispatch(setSortValue(name, value));
+	};
+
+	const handleSetSelectedItem = (id: Nullable<string>) => {
+		dispatch(setSelectedItem(id));
 	};
 
 	return (
@@ -39,13 +54,26 @@ export const ConnectedSpreadsheet = () => {
 				<Spreadsheet
 					theadData={headerData}
 					tbodyData={technics}
-					selectedItemId={selectedItemId}
-					changeSelectedItem={setSelectedItemId}
+					selectedItemId={selectedItem}
+					changeSelectedItem={handleSetSelectedItem}
 					handleSorting={handleSorting}
 					sortValues={sort}
 				/>
 			) : (
 				<SkeletonSpreadsheet />
+			)}
+			{isActive && (
+				<ModalWindow
+					isShow={isActive}
+					title={item ? 'Update' : 'Create'}
+					closeModal={() => closeModal(false)}
+				>
+					{item ? (
+						<TechnicForm item={item} closeModal={closeModal} />
+					) : (
+						<TechnicForm closeModal={closeModal} />
+					)}
+				</ModalWindow>
 			)}
 		</div>
 	);

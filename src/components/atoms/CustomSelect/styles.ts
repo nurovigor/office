@@ -25,7 +25,7 @@ export const Select = css`
 		background-repeat: no-repeat;
 		color: ${colors.white};
 		width: 30px;
-		height: 30px;
+		min-height: 30px;
 		display: flex;
 		justify-content: space-between;
 		text-align: center;

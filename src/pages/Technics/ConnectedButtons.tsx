@@ -1,18 +1,42 @@
 import React from 'react';
 import { Button } from 'src/components/atoms/Button';
 import { SkeletonButton } from 'src/components/atoms/Button/SkeletonButton';
-import { useAppSelector } from 'src/hooks';
+import { useAppDispatch, useAppSelector } from 'src/hooks';
+import { deleteItem } from 'src/store/thunks/technic';
 
-export const ConnectedButtons = () => {
+type ConnectedButtonsProps = {
+	showModal: (value: boolean) => void;
+};
+
+export const ConnectedButtons: React.FC<ConnectedButtonsProps> = ({ showModal }) => {
 	const technics = useAppSelector((state) => state.technicsNode.technics);
+	const selectedItem = useAppSelector((state) => state.technicsNode.selectedItem);
+
+	const dispatch = useAppDispatch();
+
+	const deleteItemHandle = () => {
+		if (selectedItem) {
+			dispatch(deleteItem(selectedItem));
+		}
+	};
+
+	const item = technics.find((item) => item._id === selectedItem);
+
+	const canBeDeleted = item?.bind || !selectedItem;
 
 	return (
 		<>
 			{technics.length ? (
 				<>
-					<Button>Add</Button>
-					<Button disabled={true}>Edit</Button>
-					<Button disabled={true}>Delete</Button>
+					<Button disabled={!!selectedItem} onClick={() => showModal(true)}>
+						Add
+					</Button>
+					<Button disabled={!selectedItem} onClick={() => showModal(true)}>
+						Edit
+					</Button>
+					<Button disabled={canBeDeleted} onClick={deleteItemHandle}>
+						Delete
+					</Button>
 				</>
 			) : (
 				<SkeletonButton count={3} />

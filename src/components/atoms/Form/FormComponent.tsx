@@ -27,7 +27,7 @@ export interface ValueI extends FormI {
 
 export type SuggestionType = {
 	fullName: string;
-	id: string;
+	id: Nullable<string>;
 };
 
 type FormComponentPropsType = {

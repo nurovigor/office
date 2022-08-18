@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
-import { officeBlock, Btn } from './styles';
+import { Btn, officeBlock } from './styles';
 import { Link } from 'src/components/atoms/Link';
 import { FloorType } from 'src/routes/floors';
+import { getTablesData } from 'src/store/thunks/tables';
+import { useAppDispatch } from 'src/hooks';
 
 type OfficePropsType = {
 	floors: FloorType[];
@@ -10,6 +12,11 @@ type OfficePropsType = {
 
 export const Office: React.FC<OfficePropsType> = ({ floors }) => {
 	const { pathname } = useLocation();
+	const dispatch = useAppDispatch();
+
+	useEffect(() => {
+		dispatch(getTablesData());
+	}, []);
 
 	return (
 		<div>

@@ -1,17 +1,19 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ConnectedSelect } from 'src/pages/Technics/ConnectedSelect';
 import { ConnectedPagination } from 'src/pages/Technics/ConnectedPagination';
-import { getTechnics } from 'src/store/thunks/technic';
+import { getFilters, getTechnics } from 'src/store/thunks/technic';
 import { ConnectedSpreadsheet } from 'src/pages/Technics/ConnectedSpreadsheet';
 import { ConnectedButtons } from 'src/pages/Technics/ConnectedButtons';
-import { useAppDispatch } from 'src/hooks';
 import { BtnBlock, Filter, FilterBlock, PaginationBlock, TechnicsBlock } from './styles';
+import { useAppDispatch } from 'src/hooks';
 
 export const Technics = () => {
 	const dispatch = useAppDispatch();
+	const [isActive, setIsActive] = useState(false);
 
 	useEffect(() => {
 		dispatch(getTechnics());
+		dispatch(getFilters());
 	}, []);
 
 	return (
@@ -21,11 +23,10 @@ export const Technics = () => {
 					<ConnectedSelect />
 				</div>
 				<div className={BtnBlock}>
-					<ConnectedButtons />
+					<ConnectedButtons showModal={setIsActive} />
 				</div>
 			</div>
-			<ConnectedSpreadsheet />
-
+			<ConnectedSpreadsheet isActive={isActive} closeModal={setIsActive} />
 			<div className={PaginationBlock}>
 				<ConnectedPagination />
 			</div>

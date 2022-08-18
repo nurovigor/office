@@ -12,7 +12,7 @@ export const ConnectedForm: React.FC<ConnectedFormProps> = ({
 	suggestions,
 	closeModal
 }) => {
-	suggestions.push({ fullName: 'Empty', id: 'null' });
+	suggestions.push({ fullName: 'Empty', id: null });
 	const table = useAppSelector((state) => state.officeNode.tables[tableId]);
 	return <FormComponent table={table} suggestions={suggestions} closeModal={closeModal} />;
 };

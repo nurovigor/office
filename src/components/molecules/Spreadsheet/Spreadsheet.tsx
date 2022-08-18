@@ -8,9 +8,7 @@ type SpreadsheetPropsType = {
 	theadData: any[];
 	tbodyData: any[];
 	selectedItemId: Nullable<string>;
-	// eslint-disable-next-line no-unused-vars
 	changeSelectedItem: (itemId: Nullable<string>) => void;
-	// eslint-disable-next-line no-unused-vars
 	handleSorting: (name: string, value: string) => void;
 	sortValues: string[];
 };

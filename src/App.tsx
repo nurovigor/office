@@ -1,32 +1,15 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { Office } from './pages/Office';
 import { Technics } from './pages/Technics';
 import { Header, links } from './components/molecules/Header';
 import { ConnectedFloor } from 'src/pages/Office/ConnectedFloor';
 import { floors } from './routes/floors';
-import { useAppDispatch, useAppSelector } from 'src/hooks';
-import { appThunk, setAppError } from 'src/store/thunks/app';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
-import { getFilters } from 'src/store/thunks/technic';
 
 function App() {
-	const error = useAppSelector((state) => state.appNode.error);
-	const dispatch = useAppDispatch();
-
-	useEffect(() => {
-		dispatch(getFilters());
-		dispatch(appThunk());
-	}, []);
-
-	const notify = () => toast.error(error, { onClose: () => dispatch(setAppError(null)) });
-
-	useEffect(() => {
-		notify();
-	}, [error]);
-
 	return (
 		<>
 			<Header links={links} />

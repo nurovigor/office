@@ -3,6 +3,8 @@ import { AppThunk } from 'src/store/types';
 import { actions } from 'src/store/actions';
 import { idTables } from 'src/utils/utils';
 import { technicSelectors } from 'src/store/selectors/technics';
+import { CreateDataResponse, Nullable, TechnicTypeI } from 'src/common/types/types';
+import { toast } from 'react-toastify';
 
 export const getTechnics = (): AppThunk => async (dispatch, getState) => {
 	try {
@@ -13,7 +15,7 @@ export const getTechnics = (): AppThunk => async (dispatch, getState) => {
 		dispatch(actions.technicsNode.setCurrentPage(data.currentPage));
 		dispatch(actions.technicsNode.setTotalCount(data.totalCountItems));
 	} catch (e) {
-		dispatch(actions.appNode.setError('Error while getting list of vehicles'));
+		toast.error('Error while getting list of vehicles');
 	}
 };
 
@@ -22,7 +24,45 @@ export const getFilters = (): AppThunk => async (dispatch) => {
 		const data = await technicsApi.getFilters();
 		dispatch(actions.technicsNode.setFilterOptions(data));
 	} catch (e) {
-		dispatch(actions.appNode.setError('Error while getting list of filters'));
+		toast.error('Error while getting list of filters');
+	}
+};
+
+export const createItem = (data: CreateDataResponse): AppThunk => async (dispatch) => {
+	try {
+		const res = await technicsApi.createTechnic(data);
+		dispatch(actions.technicsNode.addNewItem(res));
+		toast.success('A new device was added');
+	} catch (e) {
+		toast.error('Error while added new device');
+	}
+};
+
+export const updateItem = (
+	id: string,
+	data: CreateDataResponse
+): AppThunk<Promise<TechnicTypeI | Array<{ [key: string]: string }>>> => async (dispatch) => {
+	try {
+		const res = await technicsApi.updateTechnic(id, data);
+		dispatch(actions.technicsNode.updateItem(id, res));
+		toast.success('Device info was updated');
+		return res;
+	} catch (e) {
+		toast.error('Error while updated device info');
+		// @ts-ignore
+		return e.response.data.errors;
+	}
+};
+
+export const deleteItem = (id: string): AppThunk => async (dispatch) => {
+	try {
+		const res = await technicsApi.deleteTechnic(id);
+		dispatch(actions.technicsNode.removeItem(res._id));
+		dispatch(actions.technicsNode.setItem(null));
+		toast.success('Device was deleted');
+	} catch (e) {
+		// @ts-ignore
+		toast.error(e.response.data.error);
 	}
 };
 
@@ -54,5 +94,13 @@ export const setFilterValue = (filterName: string, filter: string): AppThunk => 
 		dispatch(getTechnics());
 	} catch (e) {
 		dispatch(actions.appNode.setError('Error while setting filter value'));
+	}
+};
+
+export const setSelectedItem = (id: Nullable<string>): AppThunk => (dispatch) => {
+	try {
+		dispatch(actions.technicsNode.setItem(id));
+	} catch (e) {
+		dispatch(actions.appNode.setError('Error while setting selected item'));
 	}
 };

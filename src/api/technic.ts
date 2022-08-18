@@ -1,5 +1,5 @@
 import { instance } from 'src/api/instance';
-import { GetTechnics } from 'src/common/types/types';
+import { CreateDataResponse, GetTechnics, TechnicTypeI } from 'src/common/types/types';
 
 export const technicsApi = {
 	getTechnics({ currentPage, pageSize, name, type, bind, sort }: GetTechnics) {
@@ -15,5 +15,14 @@ export const technicsApi = {
 	},
 	getFilters() {
 		return instance.get('technics/filters').then((res) => res.data);
+	},
+	createTechnic(data: CreateDataResponse) {
+		return instance.post<TechnicTypeI>('technics', data).then((res) => res.data);
+	},
+	updateTechnic(id: string, data: CreateDataResponse) {
+		return instance.put<TechnicTypeI>(`technics/${id}`, data).then((res) => res.data);
+	},
+	deleteTechnic(id: string) {
+		return instance.delete(`technics/${id}`).then((res) => res.data);
 	}
 };

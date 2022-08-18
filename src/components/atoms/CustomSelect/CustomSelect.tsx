@@ -8,7 +8,6 @@ type DefaultSelectPropsType = DetailedHTMLProps<
 
 type CustomSelectProps = DefaultSelectPropsType & {
 	options: string[];
-	// eslint-disable-next-line no-unused-vars
 	onChangeOption?: (filterName: string, option: string) => void;
 	filterName: string;
 	selectedFilter: string;

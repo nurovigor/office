@@ -1,5 +1,5 @@
 import { node } from 'redux-nodes';
-import { FilterName, FilterType, TechnicTypeI } from 'src/common/types/types';
+import { FilterName, FilterType, Nullable, TechnicTypeI } from 'src/common/types/types';
 
 export const technicsNode = node(
 	{
@@ -13,7 +13,8 @@ export const technicsNode = node(
 		name: '' as string,
 		type: '' as string,
 		bind: '' as string,
-		sort: [] as string[]
+		sort: [] as string[],
+		selectedItem: null as Nullable<string>
 	},
 	{
 		//actions
@@ -28,6 +29,11 @@ export const technicsNode = node(
 			(state.filter = state.filter.map((item) =>
 				item.name === filterName ? { ...item, selectedOption: filter } : item
 			)),
-		setSort: (state, name: string, value: string) => (state.sort = [name, value])
+		setSort: (state, name: string, value: string) => (state.sort = [name, value]),
+		setItem: (state, id: Nullable<string>) => (state.selectedItem = id),
+		removeItem: (state, id) => (state.technics = state.technics.filter((item) => item._id !== id)),
+		updateItem: (state, id: string, updatedItem: TechnicTypeI) =>
+			(state.technics = state.technics.map((item) => (item._id === id ? updatedItem : item))),
+		addNewItem: (state, newItem: TechnicTypeI) => (state.technics = [...state.technics, newItem])
 	}
 );
