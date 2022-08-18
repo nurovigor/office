@@ -50,6 +50,7 @@ export const PaginationBlock = css`
 export const SpreadsheetBlock = css`
 	display: flex;
 	& div {
+		width: 100%;
 		margin: 1px;
 	}
 `;

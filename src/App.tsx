@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { Office } from './pages/Office';
 import { Technics } from './pages/Technics';
@@ -10,6 +10,13 @@ import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 
 function App() {
+	useEffect(() => {
+		const spinner = document.getElementById('spinner');
+		if (spinner) {
+			spinner.style.display = 'none';
+		}
+	}, []);
+
 	return (
 		<>
 			<Header links={links} />

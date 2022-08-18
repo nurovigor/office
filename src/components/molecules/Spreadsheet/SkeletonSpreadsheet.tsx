@@ -11,9 +11,9 @@ export const SkeletonSpreadsheet = () => {
 		<div>
 			{arr.map((_, index) => (
 				<div key={index} className={SpreadsheetBlock}>
-					<SkeletonDiv width={421} height={37} />
-					<SkeletonDiv width={421} height={37} />
-					<SkeletonDiv width={421} height={37} />
+					<SkeletonDiv parentWidth={33} height={37} />
+					<SkeletonDiv parentWidth={33} height={37} />
+					<SkeletonDiv parentWidth={33} height={37} />
 				</div>
 			))}
 		</div>
