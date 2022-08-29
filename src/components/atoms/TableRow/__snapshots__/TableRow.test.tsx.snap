@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TableRow component renders TableRow component 1`] = `
+<DocumentFragment>
+  <table>
+    <tbody>
+      <tr
+        data-testid="table-row"
+      >
+        <td>
+          Panasonic
+        </td>
+        <td>
+          Headphones
+        </td>
+        <td
+          data-testid="bind"
+        >
+          No
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</DocumentFragment>
+`;

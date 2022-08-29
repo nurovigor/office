@@ -1,4 +1,4 @@
-import { css } from 'linaria';
+import { css } from '@linaria/core';
 import { colors } from 'src/components/_settings/_variables';
 
 export const Container = css`
@@ -7,6 +7,8 @@ export const Container = css`
 		cursor: pointer;
 		& td {
 			width: 300px;
+			border: 1px solid ${colors.whiteSmokeColor};
+			padding: 10px;
 		}
 	}
 `;

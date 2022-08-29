@@ -39,7 +39,7 @@ export type GetTechnics = {
 };
 
 export interface TechnicTypeI {
-	bind: string;
+	bind: boolean;
 	name: Nullable<string>;
 	serial: Nullable<string>;
 	type: Nullable<string>;
@@ -58,4 +58,10 @@ export type CreateDataResponse = {
 	type: string;
 	serial: string;
 	bind: string;
+};
+
+export type headData = {
+	id: string;
+	name: string;
+	accessor: 'name' | 'type' | 'bind';
 };

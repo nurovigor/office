@@ -1,24 +1,27 @@
-import React, { ButtonHTMLAttributes, DetailedHTMLProps, forwardRef } from 'react';
+import React from 'react';
 import cn from 'classnames';
 import { ButtonStyle } from './styles';
 
-type DefaultButtonPropsType = DetailedHTMLProps<
-	ButtonHTMLAttributes<HTMLButtonElement>,
-	HTMLButtonElement
->;
-
-export type Ref = HTMLButtonElement;
-
-export type Props = DefaultButtonPropsType & {
-	children: string;
+export type ButtonProps = {
+	children?: string;
+	onClick: () => void;
 	icon?: React.ReactElement;
+	type?: 'submit' | 'button';
+	disabled?: boolean;
+	className?: string;
 };
 
 // eslint-disable-next-line react/display-name
-export const Button = forwardRef<Ref, Props>((props, ref) => {
-	const { children, icon, ...rest } = props;
+export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
+	const { children, onClick, icon, type = 'button', className = '', disabled = false } = props;
 	return (
-		<button ref={ref} className={cn(ButtonStyle)} {...rest}>
+		<button
+			ref={ref}
+			type={type}
+			className={cn(ButtonStyle, className)}
+			disabled={disabled}
+			onClick={onClick}
+		>
 			<span>{icon}</span>
 			{children}
 		</button>

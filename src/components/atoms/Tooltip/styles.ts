@@ -1,4 +1,4 @@
-import { css } from 'linaria';
+import { css } from '@linaria/core';
 import { boxShadow, colors } from 'src/components/_settings/_variables';
 
 const paddingBottomPosition = '40px 20px';

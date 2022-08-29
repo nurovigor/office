@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from 'src/hooks';
 import { setFilterValue } from 'src/store/thunks/technic';
-import { CustomSelectV2 } from 'src/components/atoms/CustomSelect/CustomSelectV2';
+import { CustomSelect } from 'src/components/atoms/CustomSelect/CustomSelect';
 import { SkeletonSelect } from 'src/components/atoms/CustomSelect/SkeletonSelect';
 
 export const ConnectedSelect = () => {
@@ -16,7 +16,7 @@ export const ConnectedSelect = () => {
 		<>
 			{filter.length ? (
 				filter.map((item, index) => (
-					<CustomSelectV2
+					<CustomSelect
 						selectedFilter={item.selectedOption}
 						key={index}
 						optionsList={item.options}

@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tooltip component renders Tooltip 1`] = `
+<DocumentFragment>
+  <ul>
+    <li
+      class="disabled"
+    >
+      <div
+        class=""
+      />
+    </li>
+    <li>
+      1
+    </li>
+    <li>
+      2
+    </li>
+    <li>
+      3
+    </li>
+    <li>
+      4
+    </li>
+    <li>
+      5
+    </li>
+    <li
+      class=""
+    >
+      …
+    </li>
+    <li>
+      10
+    </li>
+    <li
+      class=""
+    >
+      <div
+        class=""
+      />
+    </li>
+    <div />
+  </ul>
+</DocumentFragment>
+`;

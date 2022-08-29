@@ -1,65 +1,68 @@
-import React, { DetailedHTMLProps, SelectHTMLAttributes } from 'react';
-import { Container, Select } from './styles';
+import React, { useRef, useState } from 'react';
+import { cx } from '@linaria/core';
+import { Active, Container, List, Opt, Select } from './styles';
 
-type DefaultSelectPropsType = DetailedHTMLProps<
-	SelectHTMLAttributes<HTMLSelectElement>,
-	HTMLSelectElement
->;
-
-type CustomSelectProps = DefaultSelectPropsType & {
-	options: string[];
-	onChangeOption?: (filterName: string, option: string) => void;
+type CustomSelectV2Props = {
+	optionsList: string[];
+	onChangeOption: (filterName: string, option: string) => void;
 	filterName: string;
 	selectedFilter: string;
 };
 
-export const CustomSelect: React.FC<CustomSelectProps> = ({
-	options,
-	onChange,
-	onChangeOption,
-	filterName,
+export const CustomSelect: React.FC<CustomSelectV2Props> = ({
+	optionsList,
 	selectedFilter,
-	...restProps
+	filterName,
+	onChangeOption
 }) => {
-	let mappedOptions = [] as React.ReactNode[];
+	const [isOptionsOpen, setIsOptionsOpen] = useState<boolean>(false);
 
-	if (options.includes('false')) {
-		mappedOptions = options.map((item, index) => (
-			<option key={index} value={item === 'true' ? 'Yes' : 'No'}>
-				{item === 'true' ? 'Yes' : 'No'}
-			</option>
-		));
-	} else {
-		mappedOptions = options.map((item, index) => (
-			<option key={index} value={item}>
-				{item}
-			</option>
-		));
-	}
+	const ref = useRef<HTMLTableRowElement>(null);
 
-	const onChangeCallback = (e: React.ChangeEvent<HTMLSelectElement>) => {
-		onChange && onChange(e);
+	/*useEffect(() => {
+		const checkIfClickedOutside = (e: MouseEvent) => {
+			// @ts-ignore
+			if (isOptionsOpen && ref.current && !ref.current.contains(e.target)) {
+				setIsOptionsOpen(false);
+			}
+		};
 
-		const filter =
-			e.currentTarget.value === 'Yes'
-				? 'true'
-				: e.currentTarget.value === 'No'
-					? 'false'
-					: e.currentTarget.value;
+		document.addEventListener('mousedown', checkIfClickedOutside);
 
-		const is = options.find((option) => option === filter) ? filter : '';
+		return () => {
+			document.removeEventListener('mousedown', checkIfClickedOutside);
+		};
+	}, [isOptionsOpen]);*/
 
-		onChangeOption && onChangeOption(filterName, is);
+	const onClickHandle = () => {
+		setIsOptionsOpen(!isOptionsOpen);
 	};
 
 	return (
-		<div className={Container}>
-			<select className={Select} onChange={onChangeCallback} {...restProps}>
-				<option value={selectedFilter ? selectedFilter : ''}>
-					Filter by {selectedFilter ? selectedFilter : filterName}
-				</option>
-				{mappedOptions}
-			</select>
+		<div className={Container} ref={ref}>
+			<div
+				data-testid="show-options"
+				onClick={onClickHandle}
+				className={cx(Select, isOptionsOpen && Active)}
+			>
+				{selectedFilter ? selectedFilter : `Filter by ${filterName}`}
+				{isOptionsOpen && (
+					<ul className={List}>
+						<li
+							data-testid="select-option"
+							className={Opt}
+							onClick={() => onChangeOption(filterName, '')}
+						>
+							Filter by {filterName}
+						</li>
+						{optionsList.map((option, index) => (
+							<li className={Opt} key={index} onClick={() => onChangeOption(filterName, option)}>
+								{option}
+							</li>
+						))}
+					</ul>
+				)}
+			</div>
 		</div>
 	);
 };

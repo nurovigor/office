@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
-import { Btn, officeBlock } from './styles';
 import { Link } from 'src/components/atoms/Link';
 import { FloorType } from 'src/routes/floors';
 import { getTablesData } from 'src/store/thunks/tables';
 import { useAppDispatch } from 'src/hooks';
+import { Btn, officeBlock } from './styles';
 
 type OfficePropsType = {
 	floors: FloorType[];

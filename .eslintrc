@@ -1,43 +1,67 @@
 {
-    "env": {
-        "browser": true,
-        "es2021": true
-    },
-    "extends": [
-        "eslint:recommended",
-        "plugin:react/recommended",
-        "prettier"
-    ],
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-        "requireConfigFile": false,
-        "babelOptions": {
-            "presets": [
-                "@babel/preset-react"
-            ]
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "jest/globals": true,
+    "node": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "prettier",
+    "plugin:testing-library/react",
+    "plugin:prettier/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "requireConfigFile": false,
+    "babelOptions": {
+      "presets": [
+        "env",
+        "react"
+      ],
+      "env": {
+        "development": {
+          "presets": [
+            "linaria/babel"
+          ]
+        },
+        "production": {
+          "presets": [
+            "linaria/babel"
+          ]
         }
-    },
-    "plugins": [
-        "react",
-        "@typescript-eslint"
-    ],
-    "rules": {
-        "no-unused-vars": "off",
-        "@typescript-eslint/no-unused-vars": "error",
-        "indent": [
-            "error",
-            "tab"
-        ],
-        "quotes": [
-            "error",
-            "single"
-        ],
-        "semi": [
-            "error",
-            "always"
-        ],
-        "no-console": [
-            "warn"
-        ]
+      }
     }
+  },
+  "plugins": [
+    "react",
+    "@typescript-eslint",
+    "jest",
+    "testing-library",
+    "react-hooks"
+  ],
+  "rules": {
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": "error",
+    "indent": [
+      "error",
+      "tab"
+    ],
+    "quotes": [
+      "error",
+      "single"
+    ],
+    "semi": [
+      "error",
+      "always"
+    ],
+    "no-console": [
+      "warn"
+    ],
+    "testing-library/await-async-query": "error",
+    "testing-library/no-await-sync-query": "error",
+    "testing-library/no-debugging-utils": "warn",
+    "testing-library/no-dom-import": "off"
+  }
 }

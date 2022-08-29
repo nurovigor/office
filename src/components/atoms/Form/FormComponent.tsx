@@ -130,7 +130,9 @@ export const FormComponent: React.FC<FormComponentPropsType> = ({
 									</div>
 								</div>
 							))}
-							<Button type={'submit'}>Save</Button>
+							<Button type={'submit'} onClick={() => submitForm}>
+								Save
+							</Button>
 						</Form>
 					</div>
 				);

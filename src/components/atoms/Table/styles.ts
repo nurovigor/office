@@ -1,4 +1,4 @@
-import { css } from 'linaria';
+import { css } from '@linaria/core';
 
 export const tableStyle = css`
 	width: 55px;

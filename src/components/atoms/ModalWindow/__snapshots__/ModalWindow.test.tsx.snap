@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ModalWindow component renders ModalWindow 1`] = `
+<div
+  data-testid="portal"
+>
+  <h1>
+    Portal
+  </h1>
+</div>
+`;

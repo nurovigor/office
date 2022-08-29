@@ -49,7 +49,6 @@ export const Tables: React.FC<TablesPropsType> = ({
 			{Array.from({ length: count }).map((item, index) => (
 				<div key={index}>
 					<Tooltip
-						direction="top"
 						showModal={() => setActiveModalHandle(index)}
 						content={<ConnectedInfo tableId={ids[fromNumber + index - 1]} />}
 					>
@@ -61,7 +60,7 @@ export const Tables: React.FC<TablesPropsType> = ({
 			))}
 
 			{isActive && (
-				<ModalWindow isShow={isActive} title={'PopUp'} closeModal={() => setIsActive(false)}>
+				<ModalWindow title={'PopUp'} closeModal={() => setIsActive(false)}>
 					<ConnectedForm
 						closeModal={() => setIsActive(false)}
 						tableId={ids[fromNumber + activeIndex - 1]}

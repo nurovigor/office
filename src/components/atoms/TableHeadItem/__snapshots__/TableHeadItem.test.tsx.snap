@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TableHeadItem component renders TableHeadItem component 1`] = `
+<div>
+  <table>
+    <thead>
+      <tr>
+        <th
+          title="name"
+        >
+          <button
+            class=""
+            type="button"
+          >
+            <span />
+            name
+          </button>
+          <div
+            data-testid="arrow-filter"
+          />
+        </th>
+        <th
+          title="type"
+        >
+          <button
+            class=""
+            type="button"
+          >
+            <span />
+            type
+          </button>
+          <div
+            data-testid="arrow-filter"
+          />
+        </th>
+        <th
+          title="bind"
+        >
+          <button
+            class=""
+            type="button"
+          >
+            <span />
+            bind
+          </button>
+          <div
+            data-testid="arrow-filter"
+          />
+        </th>
+      </tr>
+    </thead>
+  </table>
+</div>
+`;

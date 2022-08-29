@@ -8,7 +8,7 @@ export const technicsNode = node(
 		technics: [] as TechnicTypeI[],
 		currentPage: 1 as number,
 		totalCountItems: 0 as number,
-		pageSize: 15,
+		pageSize: 10,
 		filter: [] as FilterType[],
 		name: '' as string,
 		type: '' as string,

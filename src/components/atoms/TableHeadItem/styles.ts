@@ -1,9 +1,11 @@
-import { css } from 'linaria';
+import { css } from '@linaria/core';
 import { colors } from 'src/components/_settings/_variables';
 
 export const Container = css`
 	background-color: ${colors.primaryColor};
 	position: relative;
+	border: 1px solid ${colors.whiteSmokeColor};
+	padding: 10px;
 `;
 
 export const Btn = css`
@@ -14,6 +16,9 @@ export const Btn = css`
 		font-weight: 700;
 		color: ${colors.white};
 		padding: 0;
+		margin: 0;
+		width: 0;
+		font-size: 16px;
 	}
 `;
 

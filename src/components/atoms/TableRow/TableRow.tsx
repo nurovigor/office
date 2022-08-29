@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { Nullable, TechnicTypeI } from 'src/common/types/types';
 import { Active, Container } from './styles';
 import { cx } from '@linaria/core';
@@ -14,7 +14,7 @@ export const TableRow: React.FC<TableRowPropsType> = ({ data, selectedId, change
 		changeSelectedItem(data._id);
 	};
 
-	const boxRef = useRef<HTMLTableRowElement>(null);
+	//const boxRef = useRef<HTMLTableRowElement>(null);
 
 	/*useEffect(() => {
 		const handleClickOutside = (event: MouseEvent) => {
@@ -33,15 +33,17 @@ export const TableRow: React.FC<TableRowPropsType> = ({ data, selectedId, change
 	});*/
 
 	return (
-		<tr
-			className={cx(Container, selectedId === data._id && Active)}
-			onClick={onHandleClick}
-			onBlur={() => changeSelectedItem(null)}
-			ref={boxRef}
-		>
-			<td>{data.name}</td>
-			<td>{data.type}</td>
-			<td>{data.bind ? 'Yes' : 'No'}</td>
-		</tr>
+		<tbody>
+			<tr
+				data-testid="table-row"
+				className={cx(Container, selectedId === data._id && Active)}
+				onClick={onHandleClick}
+				//ref={boxRef}
+			>
+				<td>{data.name}</td>
+				<td>{data.type}</td>
+				<td data-testid="bind">{data.bind ? 'Yes' : 'No'}</td>
+			</tr>
+		</tbody>
 	);
 };

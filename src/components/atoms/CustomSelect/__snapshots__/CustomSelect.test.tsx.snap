@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CustomSelect component filter not selected 1`] = `
+<DocumentFragment>
+  <div>
+    <div
+      data-testid="show-options"
+    >
+      Filter by name
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`CustomSelect component renders CustomSelect 1`] = `
+<DocumentFragment>
+  <div>
+    <div
+      data-testid="show-options"
+    >
+      Panasonic
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`CustomSelect component renders CustomSelect with open options 1`] = `
+<DocumentFragment>
+  <div>
+    <div
+      data-testid="show-options"
+    >
+      Panasonic
+      <ul>
+        <li
+          data-testid="select-option"
+        >
+          Filter by name
+        </li>
+        <li>
+          name
+        </li>
+        <li>
+          type
+        </li>
+        <li>
+          bind
+        </li>
+      </ul>
+    </div>
+  </div>
+</DocumentFragment>
+`;

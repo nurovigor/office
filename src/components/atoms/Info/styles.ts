@@ -1,4 +1,4 @@
-import { css } from 'linaria';
+import { css } from '@linaria/core';
 import { colors } from 'src/components/_settings/_variables';
 
 export const Row = css`

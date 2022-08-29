@@ -13,7 +13,7 @@ export const Info: React.FC<InfoPropsType> = ({ table, count }) => {
 			<div className={Row}>
 				<div className={Name}>developer:</div>
 				<div className={Property}>
-					{table.developer ? `${table.developer.firstName} ${table.developer.lastName}` : 'null'}
+					{table.developer ? `${table.developer.firstName} ${table.developer.lastName}` : 'empty'}
 				</div>
 			</div>
 			{count.map((property, index) => (

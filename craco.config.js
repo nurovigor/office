@@ -1,11 +1,14 @@
-// eslint-disable-next-line no-undef
-const linaria = require('@dealmore/craco-plugin-linaria');
+const CracoLinariaPlugin = require('craco-linaria3');
 
-// eslint-disable-next-line no-undef
 module.exports = {
 	plugins: [
 		{
-			plugin: linaria
+			plugin: CracoLinariaPlugin,
+			options: {
+				rules: [{ action: require('@linaria/shaker').default }],
+				displayName: true,
+				sourceMap: true
+			}
 		}
 	]
 };

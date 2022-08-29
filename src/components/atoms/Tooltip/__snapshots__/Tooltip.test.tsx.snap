@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tooltip component renders Tooltip 1`] = `
+<DocumentFragment>
+  <div>
+    <div
+      data-testid="tooltip-trigger"
+    >
+      <h2>
+        Children
+      </h2>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Tooltip component renders Tooltip with content 1`] = `
+<DocumentFragment>
+  <div>
+    <div
+      data-testid="tooltip-trigger"
+    >
+      <h2>
+        Children
+      </h2>
+    </div>
+  </div>
+</DocumentFragment>
+`;

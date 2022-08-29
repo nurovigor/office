@@ -22,7 +22,7 @@ export const ConnectedButtons: React.FC<ConnectedButtonsProps> = ({ showModal })
 
 	const item = technics.find((item) => item._id === selectedItem);
 
-	const canBeDeleted = item?.bind === 'Yes' || !selectedItem;
+	const canBeDeleted = item?.bind || !selectedItem;
 
 	return (
 		<>

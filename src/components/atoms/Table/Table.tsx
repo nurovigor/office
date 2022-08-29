@@ -1,7 +1,7 @@
 import React from 'react';
+import cn from 'classnames';
 import { DirectionType } from 'src/common/types/types';
 import { tableStyle } from './styles';
-import cn from 'classnames';
 
 type LinkPropsType = {
 	direction: DirectionType;

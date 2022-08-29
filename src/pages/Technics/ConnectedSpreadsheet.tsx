@@ -1,13 +1,13 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from 'src/hooks';
-import { Nullable } from 'src/common/types/types';
+import { headData, Nullable } from 'src/common/types/types';
 import { Spreadsheet } from 'src/components/molecules/Spreadsheet';
 import { setSelectedItem, setSortValue } from 'src/store/thunks';
 import { SkeletonSpreadsheet } from 'src/components/molecules/Spreadsheet/SkeletonSpreadsheet';
 import { ModalWindow } from 'src/components/atoms/ModalWindow';
 import { TechnicForm } from 'src/components/atoms/TechnicForm';
 
-const headerData = [
+const headerData: headData[] = [
 	{
 		id: '1',
 		name: 'Name',
@@ -51,7 +51,7 @@ export const ConnectedSpreadsheet: React.FC<ConnectedSpreadsheetProps> = ({
 	};
 
 	return (
-		<div>
+		<>
 			{!isFetching ? (
 				<Spreadsheet
 					theadData={headerData}
@@ -65,11 +65,7 @@ export const ConnectedSpreadsheet: React.FC<ConnectedSpreadsheetProps> = ({
 				<SkeletonSpreadsheet />
 			)}
 			{isActive && (
-				<ModalWindow
-					isShow={isActive}
-					title={item ? 'Update' : 'Create'}
-					closeModal={() => closeModal(false)}
-				>
+				<ModalWindow title={item ? 'Update' : 'Create'} closeModal={() => closeModal(false)}>
 					{item ? (
 						<TechnicForm item={item} closeModal={closeModal} />
 					) : (
@@ -77,6 +73,6 @@ export const ConnectedSpreadsheet: React.FC<ConnectedSpreadsheetProps> = ({
 					)}
 				</ModalWindow>
 			)}
-		</div>
+		</>
 	);
 };

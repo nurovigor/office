@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { TableHeadItem } from 'src/components/atoms/TableHeadItem';
 import { TableRow } from 'src/components/atoms/TableRow';
-import { Nullable } from 'src/common/types/types';
+import { headData, Nullable } from 'src/common/types/types';
 import { Table } from 'src/components/molecules/Spreadsheet/styles';
 
 type SpreadsheetPropsType = {
-	theadData: any[];
+	theadData: headData[];
 	tbodyData: any[];
 	selectedItemId: Nullable<string>;
 	changeSelectedItem: (itemId: Nullable<string>) => void;
@@ -29,32 +29,17 @@ export const Spreadsheet: React.FC<SpreadsheetPropsType> = ({
 
 	return (
 		<table className={Table}>
-			<thead>
-				<tr>
-					{theadData.map((item) => {
-						return (
-							<TableHeadItem
-								handleSorting={handleSorting}
-								key={item.id}
-								item={item}
-								sortValues={sortValues}
-							/>
-						);
-					})}
-				</tr>
-			</thead>
-			<tbody>
-				{data.map((item) => {
-					return (
-						<TableRow
-							key={item._id}
-							data={item}
-							selectedId={selectedItemId}
-							changeSelectedItem={changeSelectedItem}
-						/>
-					);
-				})}
-			</tbody>
+			<TableHeadItem handleSorting={handleSorting} item={theadData} sortValues={sortValues} />
+			{data.map((item) => {
+				return (
+					<TableRow
+						key={item._id}
+						data={item}
+						selectedId={selectedItemId}
+						changeSelectedItem={changeSelectedItem}
+					/>
+				);
+			})}
 		</table>
 	);
 };

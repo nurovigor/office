@@ -84,7 +84,7 @@ export const AutocompleteField: React.FC<AutocompleteFieldPropType & FieldProps>
 	let suggestionsListComponent;
 
 	if (showSuggestions && userInput) {
-		if (filteredSuggestions.length) {
+		if (filteredSuggestions.length !== 0) {
 			suggestionsListComponent = (
 				<ul className={Suggestions}>
 					{filteredSuggestions.map((suggestion, index) => {

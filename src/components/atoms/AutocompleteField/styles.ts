@@ -1,4 +1,4 @@
-import { css } from 'linaria';
+import { css } from '@linaria/core';
 import { boxShadow, colors } from 'src/components/_settings/_variables';
 
 export const Container = css`

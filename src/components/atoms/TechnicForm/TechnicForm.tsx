@@ -25,7 +25,7 @@ export const TechnicForm: React.FC<TechnicFormProps> = ({ item, closeModal }) =>
 		name: item?.name || '',
 		type: item?.type || '',
 		serial: item?.serial || '',
-		bind: item?.bind || 'No'
+		bind: (item?.bind && 'Yes') || 'No'
 	};
 
 	type InitialValuesType = {
@@ -97,7 +97,9 @@ export const TechnicForm: React.FC<TechnicFormProps> = ({ item, closeModal }) =>
 									)}
 								</div>
 							</div>
-							<Button type={'submit'}>Save</Button>
+							<Button onClick={() => submitForm} type={'submit'}>
+								Save
+							</Button>
 						</Form>
 					</div>
 				);

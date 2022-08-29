@@ -1,42 +1,48 @@
-import React, { ReactNode, useEffect } from 'react';
-import ReactDOM from 'react-dom';
+import React, { ReactNode } from 'react';
+import { createPortal } from 'react-dom';
 import { Overlay, Wrapper, HeaderModal, CloseBtn, Content, Title } from './styles';
 
 type ModalPropsType = {
-	isShow: boolean;
-	title: string;
+	title?: string;
 	closeModal: () => void;
 	children: ReactNode;
 };
 
-export const ModalWindow: React.FC<ModalPropsType> = ({ isShow, title, closeModal, children }) => {
+let portal = document.getElementById('portal');
+
+if (!portal) {
+	portal = document.createElement('div');
+	portal.setAttribute('id', 'portal');
+	document.body.appendChild(portal);
+}
+
+export const ModalWindow: React.FC<ModalPropsType> = ({ title, closeModal, children }) => {
 	const onCloseHandle = () => {
 		closeModal();
 	};
 
-	useEffect(() => {
+	/*useEffect(() => {
 		if (isShow) {
 			document.body.style.overflow = 'hidden';
 		}
 		return () => {
 			document.body.style.overflow = 'unset';
 		};
-	});
+	});*/
 
-	if (!isShow) {
-		return null;
-	}
-	return ReactDOM.createPortal(
+	return createPortal(
 		<>
 			<div className={Overlay} onClick={onCloseHandle} />
 			<div className={Wrapper}>
 				<div className={HeaderModal}>
 					<div className={Title}>{title}</div>
-					<div className={CloseBtn} onClick={onCloseHandle}></div>
+					<div data-testid="close-modal" className={CloseBtn} onClick={onCloseHandle} />
 				</div>
-				<div className={Content}>{children}</div>
+				<div data-testid="portal" className={Content}>
+					{children}
+				</div>
 			</div>
 		</>,
-		document.getElementById('portal') as HTMLElement
+		portal as HTMLElement
 	);
 };
